@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allplate — Recipe Membership</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">allplate</a>
+    <div class="nav-links">
+      <a href="/members/">Recipes</a>
+      <a href="/login/" class="nav-btn" id="nav-auth-btn">Sign In</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Membership</span>
+      <h1>Cook something<br><em>worth remembering.</em></h1>
+      <p class="hero-sub">Seasonal recipes from working kitchens, tested by cooks who actually eat what they make. New dishes every week, no filler, no fluff.</p>
+      <div class="hero-actions">
+        <a href="https://buy.stripe.com/4gMaEXeLx52wflsgFW5gc09" class="btn btn-primary">Subscribe Now</a>
+        <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card hero-card-1">
+        <div class="card-img" style="--hue: 28"></div>
+        <span class="card-label">Miso-Glazed Carrots</span>
+      </div>
+      <div class="hero-card hero-card-2">
+        <div class="card-img" style="--hue: 14"></div>
+        <span class="card-label">Sourdough Focaccia</span>
+      </div>
+      <div class="hero-card hero-card-3">
+        <div class="card-img" style="--hue: 42"></div>
+        <span class="card-label">Spring Pea Risotto</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="features" id="how-it-works">
+    <div class="features-header">
+      <span class="section-tag">How It Works</span>
+      <h2>No algorithms, no ads.<br>Just good food.</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="6" width="24" height="20" rx="3" stroke="currentColor" stroke-width="2"/><path d="M4 13h24" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="19" r="2" fill="currentColor"/></svg>
+        </div>
+        <h3>Weekly drops</h3>
+        <p>Three new recipes every Thursday, built around what's in season. Each one tested at least four times before it lands in your inbox.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4v24M4 16h24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 8l16 16M24 8L8 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/></svg>
+        </div>
+        <h3>No gatekeeping</h3>
+        <p>Precise weights, real timing, honest difficulty ratings. If a recipe is hard, it says so. If it takes two hours, the title doesn't say "quick."</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 26V10a4 4 0 014-4h12a4 4 0 014 4v16" stroke="currentColor" stroke-width="2"/><path d="M6 26h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 14h8M12 19h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Full archive</h3>
+        <p>Members unlock every recipe ever published — over 340 dishes across cuisines, skill levels, and dietary needs. Search, filter, and save favorites.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sample-recipes">
+    <div class="sample-header">
+      <span class="section-tag">From the Archive</span>
+      <h2>A taste of what's inside</h2>
+    </div>
+    <div class="recipe-row">
+      <article class="recipe-card">
+        <div class="recipe-thumb" style="--hue: 18; --sat: 72%"></div>
+        <div class="recipe-meta">
+          <span class="recipe-category">Weeknight</span>
+          <span class="recipe-time">35 min</span>
+        </div>
+        <h3>Charred Broccoli with Tahini &amp; Crispy Shallots</h3>
+        <p>High heat does the heavy lifting. The tahini sauce comes together while the broccoli roasts.</p>
+      </article>
+      <article class="recipe-card">
+        <div class="recipe-thumb" style="--hue: 32; --sat: 65%"></div>
+        <div class="recipe-meta">
+          <span class="recipe-category">Weekend Project</span>
+          <span class="recipe-time">2.5 hrs</span>
+        </div>
+        <h3>Brown Butter Laminated Croissants</h3>
+        <p>The brown butter adds a nuttiness that regular butter can't touch. Start Saturday, eat Sunday.</p>
+      </article>
+      <article class="recipe-card">
+        <div class="recipe-thumb" style="--hue: 45; --sat: 58%"></div>
+        <div class="recipe-meta">
+          <span class="recipe-category">Pantry</span>
+          <span class="recipe-time">20 min</span>
+        </div>
+        <h3>Cacio e Pepe with Preserved Lemon</h3>
+        <p>The classic, with one sharp twist. Preserved lemon cuts through the richness without fighting the cheese.</p>
+      </article>
+      <article class="recipe-card recipe-card-locked">
+        <div class="recipe-thumb" style="--hue: 8; --sat: 68%"></div>
+        <div class="recipe-overlay">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="5" y="13" width="18" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 13V9a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/></svg>
+          <span>Members Only</span>
+        </div>
+        <div class="recipe-meta">
+          <span class="recipe-category">Entertaining</span>
+          <span class="recipe-time">1.5 hrs</span>
+        </div>
+        <h3>Saffron Chicken with Roasted Grapes</h3>
+        <p>A dinner party anchor that looks harder than it is. The grapes collapse into a jammy sauce.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-inner">
+      <h2>Ready to cook better?</h2>
+      <p>Join Allplate and get access to the full recipe archive, weekly drops, and a kitchen that doesn't talk down to you.</p>
+      <a href="https://buy.stripe.com/4gMaEXeLx52wflsgFW5gc09" class="btn btn-primary btn-lg">Subscribe Now</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-logo">allplate</span>
+      <div class="footer-links">
+        <a href="/login/">Sign In</a>
+        <a href="/members/">Recipes</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Allplate. Cooked with care.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/auth.js"></script>
+</body>
+</html>

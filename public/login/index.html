@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Allplate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">allplate</a>
+    <div class="nav-links">
+      <a href="/members/">Recipes</a>
+    </div>
+  </nav>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <h1 id="auth-title">Sign in</h1>
+      <p class="auth-subtitle" id="auth-subtitle">Welcome back to the kitchen.</p>
+
+      <div id="auth-message" class="auth-message" hidden></div>
+
+      <form id="auth-form" autocomplete="on">
+        <div id="name-field" class="form-group" hidden>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password" minlength="8" placeholder="At least 8 characters">
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="auth-submit">Sign In</button>
+      </form>
+
+      <div class="auth-divider"><span>or</span></div>
+
+      <div class="oauth-buttons" id="oauth-buttons"></div>
+
+      <div class="auth-toggle">
+        <button type="button" id="toggle-mode" class="link-btn">Don't have an account? Sign up</button>
+      </div>
+
+      <div id="forgot-password" class="auth-toggle">
+        <button type="button" id="forgot-btn" class="link-btn">Forgot password?</button>
+      </div>
+
+      <div id="recovery-form-wrapper" hidden>
+        <h2>Reset password</h2>
+        <p class="auth-subtitle">Enter your email and we'll send a recovery link.</p>
+        <form id="recovery-form">
+          <div class="form-group">
+            <label for="recovery-email">Email</label>
+            <input type="email" id="recovery-email" required placeholder="you@example.com">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Reset Link</button>
+        </form>
+        <div class="auth-toggle">
+          <button type="button" id="back-to-login" class="link-btn">Back to sign in</button>
+        </div>
+      </div>
+
+      <div id="set-password-wrapper" hidden>
+        <h2>Set new password</h2>
+        <form id="set-password-form">
+          <div class="form-group">
+            <label for="new-password">New password</label>
+            <input type="password" id="new-password" required minlength="8" placeholder="At least 8 characters">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Update Password</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="/js/login.js"></script>
+</body>
+</html>
