@@ -1,14 +1,9 @@
 [build]
   publish = "public"
-  functions = "netlify/functions"
 
-[[redirects]]
-  from = "/members/*"
-  to = "/members/:splat"
-  status = 200
-  conditions = { Role = ["member", "admin"] }
-
-[[redirects]]
-  from = "/members/*"
-  to = "/login/"
-  status = 302
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
