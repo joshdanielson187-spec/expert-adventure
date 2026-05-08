@@ -1,147 +1,753 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Allplate — Recipe Membership</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>All Recipe Diet — Healthy Weight-Loss Recipes by Josh Danielson</title>
+<meta name="description" content="Simple, delicious recipes and meal frameworks built for sustainable weight loss. Two flat-fee packages — no apps, no subscriptions, no fluff." />
+<meta name="theme-color" content="#fbf6ee" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1a140e" media="(prefers-color-scheme: dark)" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="All Recipe Diet — Healthy Weight-Loss Recipes" />
+<meta property="og:description" content="Real food, simple frameworks, and recipes you'll actually cook. By Josh Danielson." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="images/hero.jpg" />
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/icon-192.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.jpg" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Fonts: Fraunces (display) + Inter (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <nav class="nav">
-    <a href="/" class="nav-logo">allplate</a>
-    <div class="nav-links">
-      <a href="/members/">Recipes</a>
-      <a href="/login/" class="nav-btn" id="nav-auth-btn">Sign In</a>
-    </div>
-  </nav>
 
-  <header class="hero">
-    <div class="hero-content">
-      <span class="hero-tag">Membership</span>
-      <h1>Cook something<br><em>worth remembering.</em></h1>
-      <p class="hero-sub">Seasonal recipes from working kitchens, tested by cooks who actually eat what they make. New dishes every week, no filler, no fluff.</p>
-      <div class="hero-actions">
-        <a href="https://buy.stripe.com/4gMaEXeLx52wflsgFW5gc09" class="btn btn-primary">Subscribe Now</a>
-        <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-card hero-card-1">
-        <div class="card-img" style="--hue: 28"></div>
-        <span class="card-label">Miso-Glazed Carrots</span>
-      </div>
-      <div class="hero-card hero-card-2">
-        <div class="card-img" style="--hue: 14"></div>
-        <span class="card-label">Sourdough Focaccia</span>
-      </div>
-      <div class="hero-card hero-card-3">
-        <div class="card-img" style="--hue: 42"></div>
-        <span class="card-label">Spring Pea Risotto</span>
-      </div>
-    </div>
-  </header>
+<!-- HEADER -->
+<header class="site-header" role="banner">
+  <div class="container nav">
+    <a href="#top" class="logo" aria-label="All Recipe Diet — home">
+      <svg class="logo-mark" viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
+        <!-- Bowl -->
+        <path d="M6 22h36c0 11-8 18-18 18S6 33 6 22Z" fill="currentColor" opacity=".12"/>
+        <path d="M6 22h36c0 11-8 18-18 18S6 33 6 22Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+        <!-- Sprig leaf -->
+        <path d="M24 22c0-7 4-12 11-14-1 8-5 13-11 14Z" fill="currentColor"/>
+        <path d="M24 22c-2-3-2-7 0-11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Steam dots -->
+        <circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+        <circle cx="19" cy="9" r="1.1" fill="currentColor"/>
+      </svg>
+      <span class="logo-word">All Recipe Diet</span>
+    </a>
 
-  <section class="features" id="how-it-works">
-    <div class="features-header">
-      <span class="section-tag">How It Works</span>
-      <h2>No algorithms, no ads.<br>Just good food.</h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="6" width="24" height="20" rx="3" stroke="currentColor" stroke-width="2"/><path d="M4 13h24" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="19" r="2" fill="currentColor"/></svg>
-        </div>
-        <h3>Weekly drops</h3>
-        <p>Three new recipes every Thursday, built around what's in season. Each one tested at least four times before it lands in your inbox.</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4v24M4 16h24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 8l16 16M24 8L8 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/></svg>
-        </div>
-        <h3>No gatekeeping</h3>
-        <p>Precise weights, real timing, honest difficulty ratings. If a recipe is hard, it says so. If it takes two hours, the title doesn't say "quick."</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 26V10a4 4 0 014-4h12a4 4 0 014 4v16" stroke="currentColor" stroke-width="2"/><path d="M6 26h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 14h8M12 19h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Full archive</h3>
-        <p>Members unlock every recipe ever published — over 340 dishes across cuisines, skill levels, and dietary needs. Search, filter, and save favorites.</p>
-      </div>
-    </div>
-  </section>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#packages">Packages</a>
+      <a href="#recipes">Recipes</a>
+      <a href="#included">What's included</a>
+      <a href="#faq">FAQ</a>
+    </nav>
 
-  <section class="sample-recipes">
-    <div class="sample-header">
-      <span class="section-tag">From the Archive</span>
-      <h2>A taste of what's inside</h2>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" type="button">
+        <svg class="ico-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="currentColor"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="#packages">Get the recipes</a>
     </div>
-    <div class="recipe-row">
-      <article class="recipe-card">
-        <div class="recipe-thumb" style="--hue: 18; --sat: 72%"></div>
-        <div class="recipe-meta">
-          <span class="recipe-category">Weeknight</span>
-          <span class="recipe-time">35 min</span>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Healthy weight-loss, simplified</span>
+      <h1 class="display">Real food. Real recipes. Real results.</h1>
+      <p class="lede">A no-nonsense library of high-protein, whole-food recipes and meal frameworks designed for sustainable weight loss — by <strong>Josh Danielson</strong>. No apps. No subscriptions. Just a plan you'll actually follow.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://buy.stripe.com/eVq5kD46T0Mg7T0exO5gc05" rel="noopener">
+          Starter — $19
+          <span class="btn-sub">14 recipes · 7-day plan</span>
+        </a>
+        <a class="btn btn-secondary" href="https://buy.stripe.com/5kQbJ17j5fHa7T0dtK5gc04" rel="noopener">
+          Premium — $29
+          <span class="btn-sub">35 recipes · 21-day plan</span>
+        </a>
+      </div>
+      <ul class="hero-trust" aria-label="Trust signals">
+        <li><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 13l4 4 10-10" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> One-time payment</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 13l4 4 10-10" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Instant download</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 13l4 4 10-10" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Secure Stripe checkout</li>
+      </ul>
+    </div>
+    <figure class="hero-image">
+      <img src="images/hero.jpg" alt="An overhead spread of healthy, colorful recipes — grilled chicken with quinoa and broccoli, fresh berries, sliced avocado, and herbs on a warm linen surface." width="1600" height="900" loading="eager" fetchpriority="high" />
+      <figcaption class="hero-caption">
+        <span class="dot"></span> 35+ recipes · 30 min average · Macro-friendly
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>High-protein</span><span>·</span>
+      <span>Under 600 cal</span><span>·</span>
+      <span>30 min or less</span><span>·</span>
+      <span>Grocery-list ready</span><span>·</span>
+      <span>Family friendly</span><span>·</span>
+      <span>Macro guide included</span><span>·</span>
+      <span>High-protein</span><span>·</span>
+      <span>Under 600 cal</span><span>·</span>
+      <span>30 min or less</span><span>·</span>
+      <span>Grocery-list ready</span><span>·</span>
+      <span>Family friendly</span><span>·</span>
+      <span>Macro guide included</span><span>·</span>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" id="packages">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Two simple packages</span>
+      <h2 class="display">Pick your starting point.</h2>
+      <p class="section-lead">Both are one-time payments. Both come with everything you need to start cooking today. The only question is how deep you want to go.</p>
+    </header>
+
+    <div class="packages">
+      <!-- STARTER -->
+      <article class="card pkg pkg-starter">
+        <div class="pkg-head">
+          <h3 class="pkg-name">Starter</h3>
+          <span class="badge badge-soft">Great first step</span>
         </div>
-        <h3>Charred Broccoli with Tahini &amp; Crispy Shallots</h3>
-        <p>High heat does the heavy lifting. The tahini sauce comes together while the broccoli roasts.</p>
+        <div class="pkg-price">
+          <span class="price-currency">$</span>
+          <span class="price-amount">19</span>
+          <span class="price-meta">one-time</span>
+        </div>
+        <p class="pkg-tag">A focused 7-day framework to build the habit. Cook real food, learn the rhythm, see results.</p>
+        <ul class="pkg-list">
+          <li><span class="check">✓</span> 14 high-protein, weight-loss-friendly recipes</li>
+          <li><span class="check">✓</span> 7-day meal framework (breakfast, lunch, dinner)</li>
+          <li><span class="check">✓</span> Printable grocery list</li>
+          <li><span class="check">✓</span> Quick prep guide & swap chart</li>
+          <li><span class="check">✓</span> PDF + mobile-friendly format</li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="https://buy.stripe.com/eVq5kD46T0Mg7T0exO5gc05" rel="noopener" data-cta="starter">
+          Get Starter — $19
+        </a>
+        <p class="pkg-foot">Secure checkout via Stripe · Instant access</p>
       </article>
-      <article class="recipe-card">
-        <div class="recipe-thumb" style="--hue: 32; --sat: 65%"></div>
-        <div class="recipe-meta">
-          <span class="recipe-category">Weekend Project</span>
-          <span class="recipe-time">2.5 hrs</span>
+
+      <!-- PREMIUM -->
+      <article class="card pkg pkg-premium">
+        <div class="pkg-ribbon">Most popular</div>
+        <div class="pkg-head">
+          <h3 class="pkg-name">Premium</h3>
+          <span class="badge badge-strong">Full system</span>
         </div>
-        <h3>Brown Butter Laminated Croissants</h3>
-        <p>The brown butter adds a nuttiness that regular butter can't touch. Start Saturday, eat Sunday.</p>
-      </article>
-      <article class="recipe-card">
-        <div class="recipe-thumb" style="--hue: 45; --sat: 58%"></div>
-        <div class="recipe-meta">
-          <span class="recipe-category">Pantry</span>
-          <span class="recipe-time">20 min</span>
+        <div class="pkg-price">
+          <span class="price-currency">$</span>
+          <span class="price-amount">29</span>
+          <span class="price-meta">one-time</span>
         </div>
-        <h3>Cacio e Pepe with Preserved Lemon</h3>
-        <p>The classic, with one sharp twist. Preserved lemon cuts through the richness without fighting the cheese.</p>
-      </article>
-      <article class="recipe-card recipe-card-locked">
-        <div class="recipe-thumb" style="--hue: 8; --sat: 68%"></div>
-        <div class="recipe-overlay">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="5" y="13" width="18" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 13V9a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/></svg>
-          <span>Members Only</span>
-        </div>
-        <div class="recipe-meta">
-          <span class="recipe-category">Entertaining</span>
-          <span class="recipe-time">1.5 hrs</span>
-        </div>
-        <h3>Saffron Chicken with Roasted Grapes</h3>
-        <p>A dinner party anchor that looks harder than it is. The grapes collapse into a jammy sauce.</p>
+        <p class="pkg-tag">The complete 21-day system. More recipes, more variety, more support — at the cost of one takeout meal.</p>
+        <ul class="pkg-list">
+          <li><span class="check">✓</span> <strong>35 recipes</strong> across breakfast, lunch, dinner</li>
+          <li><span class="check">✓</span> <strong>21-day meal plan</strong> with daily structure</li>
+          <li><span class="check">✓</span> Weekly grocery lists (3 weeks)</li>
+          <li><span class="check">✓</span> Prep calendar — what to do, when</li>
+          <li><span class="check">✓</span> Macro guide & portion cheatsheet</li>
+          <li><span class="check">✓</span> <strong>Bonus snack & dessert recipes</strong></li>
+          <li><span class="check">✓</span> Everything in Starter, expanded</li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="https://buy.stripe.com/5kQbJ17j5fHa7T0dtK5gc04" rel="noopener" data-cta="premium">
+          Get Premium — $29
+        </a>
+        <p class="pkg-foot">Secure checkout via Stripe · Instant access</p>
       </article>
     </div>
-  </section>
 
-  <section class="cta">
-    <div class="cta-inner">
-      <h2>Ready to cook better?</h2>
-      <p>Join Allplate and get access to the full recipe archive, weekly drops, and a kitchen that doesn't talk down to you.</p>
-      <a href="https://buy.stripe.com/4gMaEXeLx52wflsgFW5gc09" class="btn btn-primary btn-lg">Subscribe Now</a>
+    <p class="pkg-disclaimer">
+      Educational content only — not medical or nutritional advice. Please consult your physician or a registered dietitian before starting any new eating plan, especially if you have a medical condition, are pregnant, or take medication.
+    </p>
+  </div>
+</section>
+
+<!-- RECIPES -->
+<section class="section section-cream" id="recipes">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">A taste of what's inside</span>
+      <h2 class="display">Recipes you'll actually want to cook.</h2>
+      <p class="section-lead">Every recipe is calorie-aware, high in protein, and built for real life. Most are ready in 30 minutes or less.</p>
+    </header>
+
+    <div class="recipe-grid">
+      <!-- Recipe 1 -->
+      <article class="card recipe-card">
+        <div class="recipe-img">
+          <img src="images/recipe-chicken-bowl.jpg" alt="Lemon herb chicken bowl with quinoa, charred broccoli, avocado, and lemon wedges." loading="lazy" width="800" height="600" />
+          <span class="badge-tag">In Starter & Premium</span>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">Lemon Herb Chicken Bowl</h3>
+          <p class="recipe-desc">Charred broccoli, fluffy quinoa, lemon-marinated chicken, and creamy avocado. The everyday workhorse meal.</p>
+          <ul class="recipe-meta" aria-label="Recipe stats">
+            <li><strong>520</strong><span>cal</span></li>
+            <li><strong>42g</strong><span>protein</span></li>
+            <li><strong>25</strong><span>min</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Recipe 2 -->
+      <article class="card recipe-card">
+        <div class="recipe-img">
+          <img src="images/recipe-turkey-tacos.jpg" alt="Crisp lettuce cups filled with seasoned ground turkey, tomatoes, beans, and cilantro." loading="lazy" width="800" height="600" />
+          <span class="badge-tag">In Starter & Premium</span>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">Turkey Taco Lettuce Cups</h3>
+          <p class="recipe-desc">All the taco flavor, half the calories. Lean turkey, smoky spices, fresh salsa — wrapped in crisp romaine.</p>
+          <ul class="recipe-meta">
+            <li><strong>410</strong><span>cal</span></li>
+            <li><strong>38g</strong><span>protein</span></li>
+            <li><strong>20</strong><span>min</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Recipe 3 -->
+      <article class="card recipe-card">
+        <div class="recipe-img">
+          <img src="images/recipe-yogurt-bowl.jpg" alt="Greek yogurt bowl topped with berries, granola, honey, and chia seeds." loading="lazy" width="800" height="600" />
+          <span class="badge-tag">In Starter & Premium</span>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">Greek Yogurt Berry Bowl</h3>
+          <p class="recipe-desc">A protein-packed breakfast that takes 5 minutes. Tart yogurt, mixed berries, crunchy granola, a drizzle of honey.</p>
+          <ul class="recipe-meta">
+            <li><strong>340</strong><span>cal</span></li>
+            <li><strong>28g</strong><span>protein</span></li>
+            <li><strong>5</strong><span>min</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Recipe 4 -->
+      <article class="card recipe-card">
+        <div class="recipe-img">
+          <img src="images/recipe-salmon-plate.jpg" alt="Seared salmon fillet with asparagus, avocado, and a side salad." loading="lazy" width="800" height="600" />
+          <span class="badge-tag">In Starter & Premium</span>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">Salmon &amp; Avocado Plate</h3>
+          <p class="recipe-desc">Crispy-skin salmon with lemon-dill glaze, roasted asparagus, and a bright cucumber side. Omega-3 powerhouse.</p>
+          <ul class="recipe-meta">
+            <li><strong>560</strong><span>cal</span></li>
+            <li><strong>40g</strong><span>protein</span></li>
+            <li><strong>22</strong><span>min</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Recipe 5 -->
+      <article class="card recipe-card">
+        <div class="recipe-img">
+          <img src="images/recipe-chickpea-salad.jpg" alt="Chickpea power salad with kale, feta, tomatoes, olives, and tahini dressing." loading="lazy" width="800" height="600" />
+          <span class="badge-tag">In Starter & Premium</span>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">Chickpea Power Salad</h3>
+          <p class="recipe-desc">A meal-prep favorite. Plant-based protein, crunchy veg, salty feta, and a creamy lemon-tahini dressing that holds up all week.</p>
+          <ul class="recipe-meta">
+            <li><strong>460</strong><span>cal</span></li>
+            <li><strong>22g</strong><span>protein</span></li>
+            <li><strong>15</strong><span>min</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Recipe 6 -->
+      <article class="card recipe-card">
+        <div class="recipe-img">
+          <img src="images/recipe-egg-skillet.jpg" alt="Cast iron skillet with fluffy egg whites, peppers, mushrooms, spinach, and feta." loading="lazy" width="800" height="600" />
+          <span class="badge-tag">In Starter & Premium</span>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">Egg-White Breakfast Skillet</h3>
+          <p class="recipe-desc">Veggie-loaded egg whites with peppers, spinach, mushrooms, and a sprinkle of feta. Big plate, low calories.</p>
+          <ul class="recipe-meta">
+            <li><strong>290</strong><span>cal</span></li>
+            <li><strong>32g</strong><span>protein</span></li>
+            <li><strong>15</strong><span>min</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Recipe 7 — premium locked -->
+      <article class="card recipe-card recipe-locked">
+        <div class="recipe-img">
+          <img src="images/recipe-snacks.jpg" alt="Healthy snack spread with energy balls, dark chocolate, fruit, and trail mix." loading="lazy" width="800" height="600" />
+          <span class="badge-tag badge-tag-premium">Premium bonus</span>
+          <div class="lock-overlay" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M7 10V8a5 5 0 0 1 10 0v2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            <span>Unlocks with Premium</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">Bonus Snack Pack</h3>
+          <p class="recipe-desc">Coconut energy balls, almond-butter apple slices, dark-chocolate trail mix — five smart snacks under 200 calories each.</p>
+          <ul class="recipe-meta">
+            <li><strong>5</strong><span>recipes</span></li>
+            <li><strong>&lt;200</strong><span>cal each</span></li>
+            <li><strong>10</strong><span>min</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Recipe 8 — premium locked teaser card -->
+      <article class="card recipe-card recipe-locked recipe-teaser">
+        <div class="recipe-img recipe-img-tease" aria-hidden="true">
+          <div class="tease-stack">
+            <div class="tease-row">
+              <span class="tease-pill">Sheet-Pan Honey Garlic Shrimp</span>
+              <span class="tease-pill">Beef &amp; Broccoli Stir-Fry</span>
+            </div>
+            <div class="tease-row">
+              <span class="tease-pill">Cottage-Cheese Pancakes</span>
+              <span class="tease-pill">Spicy Tuna Rice Bowl</span>
+            </div>
+            <div class="tease-row">
+              <span class="tease-pill">Mediterranean Chicken Wrap</span>
+              <span class="tease-pill">Pesto Zoodle Pasta</span>
+            </div>
+            <div class="tease-row">
+              <span class="tease-pill">Black Bean &amp; Sweet Potato Tacos</span>
+              <span class="tease-pill">+ 20 more</span>
+            </div>
+          </div>
+          <span class="badge-tag badge-tag-premium">Premium only</span>
+        </div>
+        <div class="recipe-body">
+          <h3 class="recipe-title">28 More Premium Recipes</h3>
+          <p class="recipe-desc">A full 21-day rotation across cuisines and proteins — so eating well never gets boring.</p>
+          <a class="link-arrow" href="#packages">See Premium <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
     </div>
-  </section>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <span class="footer-logo">allplate</span>
-      <div class="footer-links">
-        <a href="/login/">Sign In</a>
-        <a href="/members/">Recipes</a>
+    <div class="recipe-library" aria-labelledby="recipe-library-heading">
+      <div class="library-intro">
+        <span class="eyebrow">More recipes included</span>
+        <h3 class="display-sm" id="recipe-library-heading">A bigger preview of the recipe library.</h3>
+        <p>These are written so customers can cook right from their phone. The full paid packages include printable layouts, meal-plan order, grocery lists, and prep notes.</p>
       </div>
-      <p class="footer-copy">&copy; 2026 Allplate. Cooked with care.</p>
-    </div>
-  </footer>
 
-  <script type="module" src="/js/auth.js"></script>
+      <div class="instruction-grid">
+        <article class="instruction-card">
+          <div class="instruction-top">
+            <span class="badge-soft">15 min</span>
+            <span class="badge-soft">4 servings</span>
+          </div>
+          <img class="instruction-img" src="images/recipe-garlic-chicken.jpg" alt="Garlic butter chicken cutlets in a cast iron skillet with lemon and parsley." loading="lazy" width="800" height="600" />
+          <h4>Garlic Butter Chicken Skillet</h4>
+          <p>Tender chicken cutlets seasoned with paprika and thyme, finished with a quick garlic butter honey pan sauce.</p>
+          <details>
+            <summary>Ingredients</summary>
+            <ul>
+              <li>2 boneless skinless chicken breasts, sliced into 4 cutlets</li>
+              <li>1 tsp kosher salt, 1/2 tsp paprika, 1/2 tsp dried thyme</li>
+              <li>1/4 tsp each garlic powder, onion powder, and black pepper</li>
+              <li>1 tbsp extra-virgin olive oil</li>
+              <li>2 tbsp butter, 3 minced garlic cloves, 1 tsp honey</li>
+              <li>1 tsp Italian seasoning and 1/2 tsp dried parsley</li>
+            </ul>
+          </details>
+          <details open>
+            <summary>Instructions</summary>
+            <ol>
+              <li>Slice chicken lengthwise into four thin cutlets.</li>
+              <li>Mix salt, paprika, thyme, garlic powder, onion powder, and pepper. Season both sides.</li>
+              <li>Heat olive oil in a skillet over medium-high. Sear chicken 2 to 3 minutes per side until 165°F.</li>
+              <li>Melt butter and stir in garlic, honey, Italian seasoning, and parsley.</li>
+              <li>Reduce heat, pour sauce into the skillet, scrape browned bits, return chicken, spoon sauce over top, and serve.</li>
+            </ol>
+          </details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">25 min</span><span class="badge-soft">42g protein</span></div>
+          <img class="instruction-img" src="images/recipe-chicken-bowl.jpg" alt="Lemon herb chicken bowl with quinoa, broccoli, avocado, and lemon." loading="lazy" width="800" height="600" />
+          <h4>Lemon Herb Chicken Bowl</h4>
+          <p>A high-protein bowl with quinoa, broccoli, avocado, and lemon chicken.</p>
+          <details><summary>Ingredients</summary><ul><li>1 lb chicken breast, 2 cups cooked quinoa, 3 cups broccoli</li><li>1 avocado, 1 lemon, 1 tbsp olive oil, parsley</li><li>Garlic powder, oregano, salt, pepper</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Season chicken with lemon juice, garlic, oregano, salt, and pepper.</li><li>Sear chicken until cooked through, then rest and slice.</li><li>Char broccoli in the same pan with a splash of oil.</li><li>Build bowls with quinoa, broccoli, chicken, avocado, parsley, and lemon.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">low carb</span></div>
+          <img class="instruction-img" src="images/recipe-turkey-tacos.jpg" alt="Turkey taco lettuce cups with tomatoes, cilantro, and fresh toppings." loading="lazy" width="800" height="600" />
+          <h4>Turkey Taco Lettuce Cups</h4>
+          <p>Lean taco filling served in crisp lettuce with salsa and Greek yogurt.</p>
+          <details><summary>Ingredients</summary><ul><li>1 lb lean ground turkey, romaine leaves, 1/2 cup salsa</li><li>1 tsp chili powder, 1 tsp cumin, 1/2 tsp smoked paprika</li><li>Tomatoes, cilantro, lime, 1/4 cup plain Greek yogurt</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Brown turkey in a skillet and drain excess liquid.</li><li>Add spices and a splash of water, then simmer until coated.</li><li>Spoon into lettuce leaves and top with salsa, tomatoes, yogurt, cilantro, and lime.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">5 min</span><span class="badge-soft">breakfast</span></div>
+          <img class="instruction-img" src="images/recipe-yogurt-bowl.jpg" alt="Greek yogurt bowl with berries, granola, chia seeds, and honey." loading="lazy" width="800" height="600" />
+          <h4>Greek Yogurt Berry Bowl</h4>
+          <p>A fast breakfast with creamy yogurt, berries, chia, granola, and honey.</p>
+          <details><summary>Ingredients</summary><ul><li>1 1/2 cups nonfat Greek yogurt, 1 cup mixed berries</li><li>2 tbsp low-sugar granola, 1 tsp chia seeds, 1 tsp honey</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Add yogurt to a bowl.</li><li>Top with berries, granola, chia, and honey.</li><li>Serve cold or pack in a jar for meal prep.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">22 min</span><span class="badge-soft">40g protein</span></div>
+          <img class="instruction-img" src="images/recipe-salmon-plate.jpg" alt="Seared salmon plate with avocado, asparagus, and cucumber." loading="lazy" width="800" height="600" />
+          <h4>Salmon Avocado Plate</h4>
+          <p>Seared salmon with avocado, cucumber, asparagus, and lemon dill seasoning.</p>
+          <details><summary>Ingredients</summary><ul><li>2 salmon fillets, 1 avocado, asparagus, cucumber</li><li>Lemon, dill, garlic powder, salt, pepper, olive oil</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Season salmon with salt, pepper, dill, lemon, and garlic powder.</li><li>Sear skin-side down until crisp, then flip until cooked.</li><li>Roast or sauté asparagus and plate with avocado and cucumber.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">15 min</span><span class="badge-soft">plant-forward</span></div>
+          <img class="instruction-img" src="images/recipe-chickpea-salad.jpg" alt="Chickpea power salad with kale, feta, tomatoes, olives, and dressing." loading="lazy" width="800" height="600" />
+          <h4>Chickpea Power Salad</h4>
+          <p>A meal-prep salad with chickpeas, greens, feta, tomatoes, and lemon tahini dressing.</p>
+          <details><summary>Ingredients</summary><ul><li>1 can chickpeas, 4 cups chopped kale, tomatoes, cucumber</li><li>2 tbsp feta, 1 tbsp tahini, lemon juice, garlic, water</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Massage kale with lemon juice and a pinch of salt.</li><li>Add chickpeas, tomatoes, cucumber, and feta.</li><li>Whisk tahini, lemon, garlic, and water. Toss and serve.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">15 min</span><span class="badge-soft">32g protein</span></div>
+          <img class="instruction-img" src="images/recipe-egg-skillet.jpg" alt="Egg white breakfast skillet with peppers, mushrooms, spinach, and feta." loading="lazy" width="800" height="600" />
+          <h4>Egg-White Breakfast Skillet</h4>
+          <p>A big-volume breakfast with egg whites, peppers, mushrooms, spinach, and feta.</p>
+          <details><summary>Ingredients</summary><ul><li>1 1/2 cups egg whites, bell pepper, mushrooms, spinach</li><li>2 tbsp feta, cooking spray, salt, pepper, hot sauce</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Sauté peppers and mushrooms until softened.</li><li>Add spinach and cook until wilted.</li><li>Pour in egg whites and stir gently until set. Finish with feta and hot sauce.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">18 min</span><span class="badge-soft">one pan</span></div>
+          <img class="instruction-img" src="images/recipe-honey-shrimp.jpg" alt="Honey garlic shrimp sheet pan with zucchini, peppers, snap peas, sesame, and lime." loading="lazy" width="800" height="600" />
+          <h4>Honey Garlic Shrimp Sheet Pan</h4>
+          <p>Shrimp, zucchini, peppers, and snap peas roasted with a sweet garlic glaze.</p>
+          <details><summary>Ingredients</summary><ul><li>1 lb shrimp, zucchini, bell pepper, snap peas</li><li>1 tbsp honey, 2 tbsp low-sodium soy sauce, garlic, ginger</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Toss vegetables with half the sauce and roast for 10 minutes.</li><li>Add shrimp and remaining sauce.</li><li>Roast 6 to 8 minutes until shrimp are pink. Serve over rice or greens.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">25 min</span><span class="badge-soft">high protein</span></div>
+          <img class="instruction-img" src="images/recipe-beef-broccoli.jpg" alt="Beef and broccoli stir fry with rice and sesame seeds." loading="lazy" width="800" height="600" />
+          <h4>Beef and Broccoli Stir-Fry</h4>
+          <p>Lean beef strips with broccoli in a quick garlic ginger sauce.</p>
+          <details><summary>Ingredients</summary><ul><li>12 oz lean sirloin, 4 cups broccoli, 1/3 cup low-sodium broth</li><li>Soy sauce, garlic, ginger, cornstarch, sesame oil</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Sear sliced beef quickly and remove from pan.</li><li>Steam-sauté broccoli until bright green.</li><li>Add sauce, return beef, and simmer until glossy. Serve with rice or cauliflower rice.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">12 min</span><span class="badge-soft">breakfast</span></div>
+          <img class="instruction-img" src="images/recipe-protein-pancakes.jpg" alt="Cottage cheese protein pancakes with berries, honey, and yogurt." loading="lazy" width="800" height="600" />
+          <h4>Cottage Cheese Protein Pancakes</h4>
+          <p>Blender pancakes made with oats, eggs, cottage cheese, and cinnamon.</p>
+          <details><summary>Ingredients</summary><ul><li>1 cup cottage cheese, 2 eggs, 1/2 cup oats</li><li>1/2 tsp baking powder, cinnamon, vanilla, berries</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Blend cottage cheese, eggs, oats, baking powder, cinnamon, and vanilla.</li><li>Cook small pancakes on a nonstick pan.</li><li>Top with berries and a small drizzle of honey.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">10 min</span><span class="badge-soft">no cook</span></div>
+          <img class="instruction-img" src="images/recipe-spicy-tuna-bowl.jpg" alt="Spicy tuna rice bowl with cucumber, avocado, sesame, lime, and sauce." loading="lazy" width="800" height="600" />
+          <h4>Spicy Tuna Rice Bowl</h4>
+          <p>A fast bowl with tuna, rice, cucumber, avocado, sriracha yogurt sauce, and sesame.</p>
+          <details><summary>Ingredients</summary><ul><li>1 tuna pouch or can, 1 cup cooked rice, cucumber, avocado</li><li>Greek yogurt, sriracha, lime, soy sauce, sesame seeds</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Mix tuna with yogurt, sriracha, lime, and soy sauce.</li><li>Add rice to a bowl and top with tuna, cucumber, avocado, and sesame.</li><li>Add extra greens for more volume.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">wrap</span></div>
+          <img class="instruction-img" src="images/recipe-chicken-wrap.jpg" alt="Mediterranean chicken wrap cut in half with cucumber, tomato, feta, hummus, and greens." loading="lazy" width="800" height="600" />
+          <h4>Mediterranean Chicken Wrap</h4>
+          <p>Grilled chicken, hummus, cucumber, tomato, feta, and greens in a high-fiber wrap.</p>
+          <details><summary>Ingredients</summary><ul><li>Cooked chicken breast, whole-wheat wrap, hummus</li><li>Cucumber, tomato, greens, feta, lemon, oregano</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Spread hummus over the wrap.</li><li>Add sliced chicken, vegetables, feta, lemon, and oregano.</li><li>Roll tightly and toast seam-side down if desired.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">low carb</span></div>
+          <img class="instruction-img" src="images/recipe-pesto-zoodles.jpg" alt="Pesto zucchini noodles with lean turkey, cherry tomatoes, basil, and parmesan." loading="lazy" width="800" height="600" />
+          <h4>Pesto Zoodle Turkey Pasta</h4>
+          <p>Zucchini noodles with lean turkey, cherry tomatoes, and basil pesto.</p>
+          <details><summary>Ingredients</summary><ul><li>1 lb ground turkey, 4 cups zucchini noodles, cherry tomatoes</li><li>2 tbsp pesto, garlic, parmesan, pepper</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Brown turkey with garlic and pepper.</li><li>Add tomatoes until they soften.</li><li>Toss in zoodles and pesto for 1 to 2 minutes. Finish with parmesan.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">30 min</span><span class="badge-soft">vegetarian</span></div>
+          <img class="instruction-img" src="images/recipe-sweet-potato-tacos.jpg" alt="Black bean sweet potato tacos with cabbage, lime crema, cilantro, and lime wedges." loading="lazy" width="800" height="600" />
+          <h4>Black Bean Sweet Potato Tacos</h4>
+          <p>Roasted sweet potatoes, black beans, cabbage, lime crema, and corn tortillas.</p>
+          <details><summary>Ingredients</summary><ul><li>Sweet potato cubes, black beans, corn tortillas, cabbage</li><li>Greek yogurt, lime, cumin, chili powder, cilantro</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Roast seasoned sweet potatoes until browned.</li><li>Warm black beans with cumin and chili powder.</li><li>Fill tortillas and top with cabbage, lime crema, and cilantro.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">25 min</span><span class="badge-soft">meal prep</span></div>
+          <img class="instruction-img" src="images/recipe-stuffed-peppers.jpg" alt="Buffalo chicken stuffed bell peppers with yogurt ranch and green onions." loading="lazy" width="800" height="600" />
+          <h4>Buffalo Chicken Stuffed Peppers</h4>
+          <p>Bell peppers filled with shredded chicken, cauliflower rice, buffalo sauce, and Greek yogurt ranch.</p>
+          <details><summary>Ingredients</summary><ul><li>2 bell peppers, 2 cups shredded chicken, cauliflower rice</li><li>Buffalo sauce, Greek yogurt, ranch seasoning, green onions</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Halve peppers and bake for 10 minutes.</li><li>Mix chicken, cauliflower rice, buffalo sauce, and yogurt ranch.</li><li>Fill peppers and bake until hot. Top with green onions.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">22 min</span><span class="badge-soft">comfort food</span></div>
+          <img class="instruction-img" src="images/recipe-turkey-meatballs.jpg" alt="Turkey meatball marinara bowl with zucchini ribbons, spaghetti squash, parmesan, and basil." loading="lazy" width="800" height="600" />
+          <h4>Turkey Meatball Marinara Bowls</h4>
+          <p>Lean turkey meatballs with marinara, zucchini, and a small portion of pasta or spaghetti squash.</p>
+          <details><summary>Ingredients</summary><ul><li>1 lb ground turkey, egg, breadcrumbs, Italian seasoning</li><li>Marinara, zucchini, parmesan, basil</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Mix turkey, egg, breadcrumbs, and seasoning. Form meatballs.</li><li>Brown meatballs, then simmer in marinara until cooked.</li><li>Serve with sautéed zucchini and parmesan.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">8 min</span><span class="badge-soft">snack</span></div>
+          <img class="instruction-img" src="images/recipe-apple-almond-plate-clean.jpg" alt="Apple almond protein snack plate with sliced apples, almond butter, Greek yogurt, cinnamon, and almonds." loading="lazy" width="800" height="600" />
+          <h4>Apple Almond Protein Plate</h4>
+          <p>A quick snack plate with apple slices, almond butter, Greek yogurt, and cinnamon.</p>
+          <details><summary>Ingredients</summary><ul><li>1 apple, 1 tbsp almond butter, 3/4 cup Greek yogurt</li><li>Cinnamon, optional low-sugar granola</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Slice apple and spread or dip with almond butter.</li><li>Add yogurt to the plate and dust with cinnamon.</li><li>Use granola lightly for crunch if desired.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">seafood</span></div>
+          <img class="instruction-img" src="images/recipe-cajun-cod.jpg" alt="Cajun cod with green beans, lemon, and garlic parsley yogurt sauce." loading="lazy" width="800" height="600" />
+          <h4>Cajun Cod with Green Beans</h4>
+          <p>Flaky cod with Cajun spices, green beans, lemon, and a quick yogurt sauce.</p>
+          <details><summary>Ingredients</summary><ul><li>2 cod fillets, green beans, lemon, Cajun seasoning</li><li>Greek yogurt, garlic powder, parsley, olive oil</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Season cod with Cajun seasoning and lemon.</li><li>Sear or bake until flaky.</li><li>Cook green beans and serve with garlic parsley yogurt sauce.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">18 min</span><span class="badge-soft">bowl</span></div>
+          <img class="instruction-img" src="images/recipe-fajita-bowl.jpg" alt="Chicken fajita cauliflower rice bowl with peppers, avocado, salsa, cilantro, and lime." loading="lazy" width="800" height="600" />
+          <h4>Chicken Fajita Cauliflower Rice Bowl</h4>
+          <p>Chicken strips, peppers, onions, cauliflower rice, salsa, and avocado.</p>
+          <details><summary>Ingredients</summary><ul><li>Chicken breast strips, cauliflower rice, peppers, onion</li><li>Fajita seasoning, salsa, avocado, lime</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Sauté chicken with fajita seasoning until cooked.</li><li>Add peppers and onions until tender-crisp.</li><li>Serve over cauliflower rice with salsa, avocado, and lime.</li></ol></details>
+        </article>
+      </div>
+
+      <div class="recipe-library-cta">
+        <p><strong>No sign-in required.</strong> Customers buy through Stripe, then land on the success page and follow the receipt/download instructions.</p>
+        <a class="btn btn-primary" href="#packages">Choose Starter or Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="section" id="included">
+  <div class="container included-grid">
+    <div class="included-copy">
+      <span class="eyebrow">What you actually get</span>
+      <h2 class="display">A real plan, not another app to ignore.</h2>
+      <p class="section-lead">Beautiful PDFs and mobile-ready pages you can print, screenshot, and follow. Everything is designed to remove decisions, so you can just cook.</p>
+
+      <ul class="feature-list">
+        <li>
+          <span class="feature-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <h3>Day-by-day meal plans</h3>
+            <p>Breakfast, lunch, dinner — already mapped out. No more 6pm "what do we eat?" spirals.</p>
+          </div>
+        </li>
+        <li>
+          <span class="feature-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 4h11l3 3v13H5z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <h3>Printable grocery lists</h3>
+            <p>Organized by aisle. One trip a week. Zero impulse takeout.</p>
+          </div>
+        </li>
+        <li>
+          <span class="feature-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <h3>30-minute prep guide</h3>
+            <p>One short Sunday session, lunches and dinners ready for the week.</p>
+          </div>
+        </li>
+        <li>
+          <span class="feature-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 12a9 9 0 1 0 9-9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M12 3v9l6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <h3>Macro &amp; portion guide <span class="muted">(Premium)</span></h3>
+            <p>Hit your protein, stay in a calorie range, without weighing every bite.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <figure class="included-image">
+      <img src="images/meal-prep.jpg" alt="A meal prep flat-lay: glass containers of grilled chicken, brown rice, roasted vegetables, and salads, with fresh produce and a handwritten meal plan." loading="lazy" width="1280" height="720" />
+    </figure>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-warm" aria-labelledby="social-heading">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">From the kitchen table</span>
+      <h2 class="display" id="social-heading">Why people stick with it.</h2>
+      <p class="section-lead">A few notes from cooks using the Starter and Premium packages. Individual experiences vary; results depend on consistency and overall lifestyle.</p>
+    </header>
+
+    <div class="quote-grid">
+      <figure class="card quote">
+        <blockquote>"It's the first time a 'diet' didn't feel like a diet. The lemon herb chicken is in our weekly rotation now."</blockquote>
+        <figcaption><span class="initials" aria-hidden="true">MR</span><span>Maya R.<small> · Starter pack</small></span></figcaption>
+      </figure>
+      <figure class="card quote quote-feature">
+        <blockquote>"Down 11 lbs over the 21-day plan. The Sunday prep calendar was the unlock — I stopped winging it at 7pm."</blockquote>
+        <figcaption><span class="initials" aria-hidden="true">DJ</span><span>Devin J.<small> · Premium</small></span></figcaption>
+      </figure>
+      <figure class="card quote">
+        <blockquote>"The grocery list alone is worth it. I cook for two, the recipes scale, my husband stopped asking for takeout."</blockquote>
+        <figcaption><span class="initials" aria-hidden="true">LH</span><span>Lena H.<small> · Premium</small></span></figcaption>
+      </figure>
+      <figure class="card quote">
+        <blockquote>"Clear, simple, and the food is genuinely good. The macro cheatsheet finally made sense to me."</blockquote>
+        <figcaption><span class="initials" aria-hidden="true">JT</span><span>Jordan T.<small> · Premium</small></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container faq-wrap">
+    <header class="section-head">
+      <span class="eyebrow">Questions, answered</span>
+      <h2 class="display">FAQ</h2>
+    </header>
+
+    <div class="faq">
+      <details>
+        <summary>Is this a subscription?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>No. Both packages are one-time purchases. You pay once and own the recipes and PDFs forever.</p>
+      </details>
+      <details>
+        <summary>What format do I get?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>You'll receive a clean, printable PDF plus mobile-friendly pages, delivered immediately after checkout. No accounts to set up, no apps to install.</p>
+      </details>
+      <details>
+        <summary>Do customers need to sign in?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>No. There is no sign-in or membership portal on this site. Customers click a package button, pay through secure Stripe checkout, then land on the success page with receipt and download instructions.</p>
+      </details>
+      <details>
+        <summary>I have dietary restrictions — will this work?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>Recipes lean toward whole-food, high-protein meals with simple ingredient swaps. They are not designed for specific medical conditions or allergens. Please consult your physician or a registered dietitian before starting if you have allergies, intolerances, or a medical condition.</p>
+      </details>
+      <details>
+        <summary>How is this different from a free recipe blog?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>Free blogs give you recipes; this gives you a <em>system</em>. Curated recipes that work together, a calendar, a grocery list, and a prep flow — so you stop reinventing your week every Sunday.</p>
+      </details>
+      <details>
+        <summary>Will I lose weight?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>The recipes are designed to be calorie-aware and high-protein, which can support a sustainable calorie deficit. We make no medical guarantees. Results depend on consistency, total intake, sleep, activity, and individual factors. This is educational content, not medical or nutritional advice.</p>
+      </details>
+      <details>
+        <summary>Refund policy?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>Because the content is digital and delivered immediately, all sales are final. If your file didn't deliver or you have a question, email Josh and he'll make it right.</p>
+      </details>
+      <details>
+        <summary>Who is Josh Danielson?<span class="chev" aria-hidden="true">+</span></summary>
+        <p>Josh is a home cook and weight-loss enthusiast who built these recipes after losing weight himself by simplifying his meals. All Recipe Diet is the system he wishes he'd had on day one.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section final-cta">
+  <div class="container">
+    <div class="cta-card">
+      <h2 class="display">Cook real food. Lose the weight. Keep your evenings.</h2>
+      <p>Pick the package that fits — get the recipes in your inbox in under a minute.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/eVq5kD46T0Mg7T0exO5gc05" rel="noopener">
+          Starter — $19
+          <span class="btn-sub">14 recipes · 7-day plan</span>
+        </a>
+        <a class="btn btn-secondary btn-lg" href="https://buy.stripe.com/5kQbJ17j5fHa7T0dtK5gc04" rel="noopener">
+          Premium — $29
+          <span class="btn-sub">35 recipes · 21-day plan</span>
+        </a>
+      </div>
+      <p class="cta-fine">Secure Stripe checkout. One-time payment. Instant download.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo logo-footer" aria-label="All Recipe Diet — home">
+        <svg class="logo-mark" viewBox="0 0 48 48" width="32" height="32" aria-hidden="true">
+          <path d="M6 22h36c0 11-8 18-18 18S6 33 6 22Z" fill="currentColor" opacity=".12"/>
+          <path d="M6 22h36c0 11-8 18-18 18S6 33 6 22Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+          <path d="M24 22c0-7 4-12 11-14-1 8-5 13-11 14Z" fill="currentColor"/>
+          <path d="M24 22c-2-3-2-7 0-11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+          <circle cx="19" cy="9" r="1.1" fill="currentColor"/>
+        </svg>
+        <span class="logo-word">All Recipe Diet</span>
+      </a>
+      <p class="footer-tag">Healthy weight-loss recipes by Josh Danielson.</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <h4>Explore</h4>
+      <a href="#packages">Packages</a>
+      <a href="#recipes">Recipes</a>
+      <a href="#included">What's included</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="footer-disclaimer">
+      <h4>Important</h4>
+      <p>All Recipe Diet provides educational content only. It is <strong>not medical or nutritional advice</strong>, diagnosis, or treatment. Always consult your physician, registered dietitian, or qualified health professional before starting any new eating plan, especially if you have a medical condition, take medication, are pregnant or nursing, or are managing a child's diet. Individual results vary.</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <small>© <span id="year"></span> All Recipe Diet · Created by Josh Danielson</small>
+    <small>Secure payments via Stripe</small>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
 </body>
 </html>
