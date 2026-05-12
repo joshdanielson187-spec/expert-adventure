@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>My Recipes — All Recipe Diet</title>
+<meta name="description" content="Access your purchased All Recipe Diet recipes. Enter the email you used at checkout." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#fbf6ee" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1a140e" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .lookup-section { min-height: calc(100vh - 180px); display: grid; align-items: center; }
+  .lookup-card {
+    max-width: 540px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .lookup-card .display { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .lookup-form {
+    display: flex;
+    gap: 10px;
+    margin: 28px 0 16px;
+  }
+  @media (max-width: 540px) { .lookup-form { flex-direction: column; } }
+  .lookup-input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .lookup-input:focus { border-color: var(--primary); }
+  .lookup-input::placeholder { color: var(--text-muted); opacity: .6; }
+  .lookup-msg {
+    font-size: .94rem;
+    color: var(--text-muted);
+    margin: 0;
+    min-height: 1.6em;
+  }
+  .lookup-msg.is-error { color: var(--terracotta); }
+
+  .recipes-section { display: none; }
+  .recipes-section.is-visible { display: block; }
+  .recipes-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: clamp(24px, 3vw, 36px);
+  }
+  .recipes-header .badge { font-size: .82rem; padding: 6px 14px; }
+  .recipe-tier-label {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 4px;
+  }
+  .premium-section { margin-top: clamp(32px, 5vw, 56px); padding-top: clamp(24px, 3vw, 36px); border-top: 1px solid var(--border); }
+  [data-tier="premium"] { display: none; }
+  .is-premium [data-tier="premium"] { display: block; }
+
+  .logout-link {
+    font-size: .9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .logout-link:hover { color: var(--primary); }
+</style>
+</head>
+<body>
+<header class="site-header" role="banner">
+  <div class="container nav">
+    <a href="/" class="logo" aria-label="All Recipe Diet — home">
+      <svg class="logo-mark" viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
+        <path d="M6 22h36c0 11-8 18-18 18S6 33 6 22Z" fill="currentColor" opacity=".12"/>
+        <path d="M6 22h36c0 11-8 18-18 18S6 33 6 22Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+        <path d="M24 22c0-7 4-12 11-14-1 8-5 13-11 14Z" fill="currentColor"/>
+        <path d="M24 22c-2-3-2-7 0-11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="1.4" fill="currentColor"/>
+        <circle cx="19" cy="9" r="1.1" fill="currentColor"/>
+      </svg>
+      <span class="logo-word">All Recipe Diet</span>
+    </a>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" type="button">
+        <svg class="ico-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></g></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="currentColor"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/">Back to site</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- LOOKUP SECTION -->
+<section class="section lookup-section" id="lookup">
+  <div class="container">
+    <div class="cta-card lookup-card">
+      <span class="eyebrow">Your recipes</span>
+      <h1 class="display">Access your recipe package.</h1>
+      <p class="section-lead" style="margin-inline:auto">Enter the email address you used at Stripe checkout. We'll pull up the recipes included in your purchase.</p>
+      <form class="lookup-form" id="lookup-form" autocomplete="on">
+        <input class="lookup-input" type="email" name="email" id="lookup-email" placeholder="you@email.com" required autocomplete="email" />
+        <button class="btn btn-primary" type="submit">View recipes</button>
+      </form>
+      <p class="lookup-msg" id="lookup-msg"></p>
+      <p class="cta-fine" style="margin-top:20px">Don't have a package yet? <a href="/#packages" style="color:var(--primary);font-weight:600">Get one here.</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- RECIPES SECTION (hidden until verified) -->
+<section class="section section-cream recipes-section" id="recipes-content">
+  <div class="container">
+    <div class="recipes-header">
+      <div>
+        <span class="eyebrow">Your recipe library</span>
+        <h2 class="display" style="margin-bottom:0">Your recipes are ready.</h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <span class="badge badge-strong" id="pkg-badge"></span>
+        <button class="logout-link" id="logout-btn" type="button">Use different email</button>
+      </div>
+    </div>
+
+    <!-- STARTER RECIPES -->
+    <div data-tier="starter">
+      <span class="recipe-tier-label">Starter + Premium recipes</span>
+      <div class="instruction-grid">
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">15 min</span><span class="badge-soft">4 servings</span></div>
+          <img class="instruction-img" src="images/recipe-garlic-chicken.jpg" alt="Garlic butter chicken cutlets in a cast iron skillet with lemon and parsley." loading="lazy" width="800" height="600" />
+          <h4>Garlic Butter Chicken Skillet</h4>
+          <p>Tender chicken cutlets seasoned with paprika and thyme, finished with a quick garlic butter honey pan sauce.</p>
+          <details><summary>Ingredients</summary><ul><li>2 boneless skinless chicken breasts, sliced into 4 cutlets</li><li>1 tsp kosher salt, 1/2 tsp paprika, 1/2 tsp dried thyme</li><li>1/4 tsp each garlic powder, onion powder, and black pepper</li><li>1 tbsp extra-virgin olive oil</li><li>2 tbsp butter, 3 minced garlic cloves, 1 tsp honey</li><li>1 tsp Italian seasoning and 1/2 tsp dried parsley</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Slice chicken lengthwise into four thin cutlets.</li><li>Mix salt, paprika, thyme, garlic powder, onion powder, and pepper. Season both sides.</li><li>Heat olive oil in a skillet over medium-high. Sear chicken 2 to 3 minutes per side until 165°F.</li><li>Melt butter and stir in garlic, honey, Italian seasoning, and parsley.</li><li>Reduce heat, pour sauce into the skillet, scrape browned bits, return chicken, spoon sauce over top, and serve.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">25 min</span><span class="badge-soft">42g protein</span></div>
+          <img class="instruction-img" src="images/recipe-chicken-bowl.jpg" alt="Lemon herb chicken bowl with quinoa, broccoli, avocado, and lemon." loading="lazy" width="800" height="600" />
+          <h4>Lemon Herb Chicken Bowl</h4>
+          <p>A high-protein bowl with quinoa, broccoli, avocado, and lemon chicken.</p>
+          <details><summary>Ingredients</summary><ul><li>1 lb chicken breast, 2 cups cooked quinoa, 3 cups broccoli</li><li>1 avocado, 1 lemon, 1 tbsp olive oil, parsley</li><li>Garlic powder, oregano, salt, pepper</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Season chicken with lemon juice, garlic, oregano, salt, and pepper.</li><li>Sear chicken until cooked through, then rest and slice.</li><li>Char broccoli in the same pan with a splash of oil.</li><li>Build bowls with quinoa, broccoli, chicken, avocado, parsley, and lemon.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">low carb</span></div>
+          <img class="instruction-img" src="images/recipe-turkey-tacos.jpg" alt="Turkey taco lettuce cups with tomatoes, cilantro, and fresh toppings." loading="lazy" width="800" height="600" />
+          <h4>Turkey Taco Lettuce Cups</h4>
+          <p>Lean taco filling served in crisp lettuce with salsa and Greek yogurt.</p>
+          <details><summary>Ingredients</summary><ul><li>1 lb lean ground turkey, romaine leaves, 1/2 cup salsa</li><li>1 tsp chili powder, 1 tsp cumin, 1/2 tsp smoked paprika</li><li>Tomatoes, cilantro, lime, 1/4 cup plain Greek yogurt</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Brown turkey in a skillet and drain excess liquid.</li><li>Add spices and a splash of water, then simmer until coated.</li><li>Spoon into lettuce leaves and top with salsa, tomatoes, yogurt, cilantro, and lime.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">5 min</span><span class="badge-soft">breakfast</span></div>
+          <img class="instruction-img" src="images/recipe-yogurt-bowl.jpg" alt="Greek yogurt bowl with berries, granola, chia seeds, and honey." loading="lazy" width="800" height="600" />
+          <h4>Greek Yogurt Berry Bowl</h4>
+          <p>A fast breakfast with creamy yogurt, berries, chia, granola, and honey.</p>
+          <details><summary>Ingredients</summary><ul><li>1 1/2 cups nonfat Greek yogurt, 1 cup mixed berries</li><li>2 tbsp low-sugar granola, 1 tsp chia seeds, 1 tsp honey</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Add yogurt to a bowl.</li><li>Top with berries, granola, chia, and honey.</li><li>Serve cold or pack in a jar for meal prep.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">22 min</span><span class="badge-soft">40g protein</span></div>
+          <img class="instruction-img" src="images/recipe-salmon-plate.jpg" alt="Seared salmon plate with avocado, asparagus, and cucumber." loading="lazy" width="800" height="600" />
+          <h4>Salmon Avocado Plate</h4>
+          <p>Seared salmon with avocado, cucumber, asparagus, and lemon dill seasoning.</p>
+          <details><summary>Ingredients</summary><ul><li>2 salmon fillets, 1 avocado, asparagus, cucumber</li><li>Lemon, dill, garlic powder, salt, pepper, olive oil</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Season salmon with salt, pepper, dill, lemon, and garlic powder.</li><li>Sear skin-side down until crisp, then flip until cooked.</li><li>Roast or sauté asparagus and plate with avocado and cucumber.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">15 min</span><span class="badge-soft">plant-forward</span></div>
+          <img class="instruction-img" src="images/recipe-chickpea-salad.jpg" alt="Chickpea power salad with kale, feta, tomatoes, olives, and dressing." loading="lazy" width="800" height="600" />
+          <h4>Chickpea Power Salad</h4>
+          <p>A meal-prep salad with chickpeas, greens, feta, tomatoes, and lemon tahini dressing.</p>
+          <details><summary>Ingredients</summary><ul><li>1 can chickpeas, 4 cups chopped kale, tomatoes, cucumber</li><li>2 tbsp feta, 1 tbsp tahini, lemon juice, garlic, water</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Massage kale with lemon juice and a pinch of salt.</li><li>Add chickpeas, tomatoes, cucumber, and feta.</li><li>Whisk tahini, lemon, garlic, and water. Toss and serve.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">15 min</span><span class="badge-soft">32g protein</span></div>
+          <img class="instruction-img" src="images/recipe-egg-skillet.jpg" alt="Egg white breakfast skillet with peppers, mushrooms, spinach, and feta." loading="lazy" width="800" height="600" />
+          <h4>Egg-White Breakfast Skillet</h4>
+          <p>A big-volume breakfast with egg whites, peppers, mushrooms, spinach, and feta.</p>
+          <details><summary>Ingredients</summary><ul><li>1 1/2 cups egg whites, bell pepper, mushrooms, spinach</li><li>2 tbsp feta, cooking spray, salt, pepper, hot sauce</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Sauté peppers and mushrooms until softened.</li><li>Add spinach and cook until wilted.</li><li>Pour in egg whites and stir gently until set. Finish with feta and hot sauce.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">12 min</span><span class="badge-soft">breakfast</span></div>
+          <img class="instruction-img" src="images/recipe-protein-pancakes.jpg" alt="Cottage cheese protein pancakes with berries, honey, and yogurt." loading="lazy" width="800" height="600" />
+          <h4>Cottage Cheese Protein Pancakes</h4>
+          <p>Blender pancakes made with oats, eggs, cottage cheese, and cinnamon.</p>
+          <details><summary>Ingredients</summary><ul><li>1 cup cottage cheese, 2 eggs, 1/2 cup oats</li><li>1/2 tsp baking powder, cinnamon, vanilla, berries</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Blend cottage cheese, eggs, oats, baking powder, cinnamon, and vanilla.</li><li>Cook small pancakes on a nonstick pan.</li><li>Top with berries and a small drizzle of honey.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">10 min</span><span class="badge-soft">no cook</span></div>
+          <img class="instruction-img" src="images/recipe-spicy-tuna-bowl.jpg" alt="Spicy tuna rice bowl with cucumber, avocado, sesame, lime, and sauce." loading="lazy" width="800" height="600" />
+          <h4>Spicy Tuna Rice Bowl</h4>
+          <p>A fast bowl with tuna, rice, cucumber, avocado, sriracha yogurt sauce, and sesame.</p>
+          <details><summary>Ingredients</summary><ul><li>1 tuna pouch or can, 1 cup cooked rice, cucumber, avocado</li><li>Greek yogurt, sriracha, lime, soy sauce, sesame seeds</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Mix tuna with yogurt, sriracha, lime, and soy sauce.</li><li>Add rice to a bowl and top with tuna, cucumber, avocado, and sesame.</li><li>Add extra greens for more volume.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">wrap</span></div>
+          <img class="instruction-img" src="images/recipe-chicken-wrap.jpg" alt="Mediterranean chicken wrap cut in half with cucumber, tomato, feta, hummus, and greens." loading="lazy" width="800" height="600" />
+          <h4>Mediterranean Chicken Wrap</h4>
+          <p>Grilled chicken, hummus, cucumber, tomato, feta, and greens in a high-fiber wrap.</p>
+          <details><summary>Ingredients</summary><ul><li>Cooked chicken breast, whole-wheat wrap, hummus</li><li>Cucumber, tomato, greens, feta, lemon, oregano</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Spread hummus over the wrap.</li><li>Add sliced chicken, vegetables, feta, lemon, and oregano.</li><li>Roll tightly and toast seam-side down if desired.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">30 min</span><span class="badge-soft">vegetarian</span></div>
+          <img class="instruction-img" src="images/recipe-sweet-potato-tacos.jpg" alt="Black bean sweet potato tacos with cabbage, lime crema, cilantro, and lime wedges." loading="lazy" width="800" height="600" />
+          <h4>Black Bean Sweet Potato Tacos</h4>
+          <p>Roasted sweet potatoes, black beans, cabbage, lime crema, and corn tortillas.</p>
+          <details><summary>Ingredients</summary><ul><li>Sweet potato cubes, black beans, corn tortillas, cabbage</li><li>Greek yogurt, lime, cumin, chili powder, cilantro</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Roast seasoned sweet potatoes until browned.</li><li>Warm black beans with cumin and chili powder.</li><li>Fill tortillas and top with cabbage, lime crema, and cilantro.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">8 min</span><span class="badge-soft">snack</span></div>
+          <img class="instruction-img" src="images/recipe-apple-almond-plate-clean.jpg" alt="Apple almond protein snack plate with sliced apples, almond butter, Greek yogurt, cinnamon, and almonds." loading="lazy" width="800" height="600" />
+          <h4>Apple Almond Protein Plate</h4>
+          <p>A quick snack plate with apple slices, almond butter, Greek yogurt, and cinnamon.</p>
+          <details><summary>Ingredients</summary><ul><li>1 apple, 1 tbsp almond butter, 3/4 cup Greek yogurt</li><li>Cinnamon, optional low-sugar granola</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Slice apple and spread or dip with almond butter.</li><li>Add yogurt to the plate and dust with cinnamon.</li><li>Use granola lightly for crunch if desired.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">seafood</span></div>
+          <img class="instruction-img" src="images/recipe-cajun-cod.jpg" alt="Cajun cod with green beans, lemon, and garlic parsley yogurt sauce." loading="lazy" width="800" height="600" />
+          <h4>Cajun Cod with Green Beans</h4>
+          <p>Flaky cod with Cajun spices, green beans, lemon, and a quick yogurt sauce.</p>
+          <details><summary>Ingredients</summary><ul><li>2 cod fillets, green beans, lemon, Cajun seasoning</li><li>Greek yogurt, garlic powder, parsley, olive oil</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Season cod with Cajun seasoning and lemon.</li><li>Sear or bake until flaky.</li><li>Cook green beans and serve with garlic parsley yogurt sauce.</li></ol></details>
+        </article>
+
+        <article class="instruction-card">
+          <div class="instruction-top"><span class="badge-soft">18 min</span><span class="badge-soft">bowl</span></div>
+          <img class="instruction-img" src="images/recipe-fajita-bowl.jpg" alt="Chicken fajita cauliflower rice bowl with peppers, avocado, salsa, cilantro, and lime." loading="lazy" width="800" height="600" />
+          <h4>Chicken Fajita Cauliflower Rice Bowl</h4>
+          <p>Chicken strips, peppers, onions, cauliflower rice, salsa, and avocado.</p>
+          <details><summary>Ingredients</summary><ul><li>Chicken breast strips, cauliflower rice, peppers, onion</li><li>Fajita seasoning, salsa, avocado, lime</li></ul></details>
+          <details><summary>Instructions</summary><ol><li>Sauté chicken with fajita seasoning until cooked.</li><li>Add peppers and onions until tender-crisp.</li><li>Serve over cauliflower rice with salsa, avocado, and lime.</li></ol></details>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- PREMIUM-ONLY RECIPES -->
+    <div data-tier="premium">
+      <div class="premium-section">
+        <span class="recipe-tier-label">Premium-only recipes</span>
+        <div class="instruction-grid">
+
+          <article class="instruction-card">
+            <div class="instruction-top"><span class="badge-soft">18 min</span><span class="badge-soft">one pan</span></div>
+            <img class="instruction-img" src="images/recipe-honey-shrimp.jpg" alt="Honey garlic shrimp sheet pan with zucchini, peppers, snap peas, sesame, and lime." loading="lazy" width="800" height="600" />
+            <h4>Honey Garlic Shrimp Sheet Pan</h4>
+            <p>Shrimp, zucchini, peppers, and snap peas roasted with a sweet garlic glaze.</p>
+            <details><summary>Ingredients</summary><ul><li>1 lb shrimp, zucchini, bell pepper, snap peas</li><li>1 tbsp honey, 2 tbsp low-sodium soy sauce, garlic, ginger</li></ul></details>
+            <details><summary>Instructions</summary><ol><li>Toss vegetables with half the sauce and roast for 10 minutes.</li><li>Add shrimp and remaining sauce.</li><li>Roast 6 to 8 minutes until shrimp are pink. Serve over rice or greens.</li></ol></details>
+          </article>
+
+          <article class="instruction-card">
+            <div class="instruction-top"><span class="badge-soft">25 min</span><span class="badge-soft">high protein</span></div>
+            <img class="instruction-img" src="images/recipe-beef-broccoli.jpg" alt="Beef and broccoli stir fry with rice and sesame seeds." loading="lazy" width="800" height="600" />
+            <h4>Beef and Broccoli Stir-Fry</h4>
+            <p>Lean beef strips with broccoli in a quick garlic ginger sauce.</p>
+            <details><summary>Ingredients</summary><ul><li>12 oz lean sirloin, 4 cups broccoli, 1/3 cup low-sodium broth</li><li>Soy sauce, garlic, ginger, cornstarch, sesame oil</li></ul></details>
+            <details><summary>Instructions</summary><ol><li>Sear sliced beef quickly and remove from pan.</li><li>Steam-sauté broccoli until bright green.</li><li>Add sauce, return beef, and simmer until glossy. Serve with rice or cauliflower rice.</li></ol></details>
+          </article>
+
+          <article class="instruction-card">
+            <div class="instruction-top"><span class="badge-soft">20 min</span><span class="badge-soft">low carb</span></div>
+            <img class="instruction-img" src="images/recipe-pesto-zoodles.jpg" alt="Pesto zucchini noodles with lean turkey, cherry tomatoes, basil, and parmesan." loading="lazy" width="800" height="600" />
+            <h4>Pesto Zoodle Turkey Pasta</h4>
+            <p>Zucchini noodles with lean turkey, cherry tomatoes, and basil pesto.</p>
+            <details><summary>Ingredients</summary><ul><li>1 lb ground turkey, 4 cups zucchini noodles, cherry tomatoes</li><li>2 tbsp pesto, garlic, parmesan, pepper</li></ul></details>
+            <details><summary>Instructions</summary><ol><li>Brown turkey with garlic and pepper.</li><li>Add tomatoes until they soften.</li><li>Toss in zoodles and pesto for 1 to 2 minutes. Finish with parmesan.</li></ol></details>
+          </article>
+
+          <article class="instruction-card">
+            <div class="instruction-top"><span class="badge-soft">25 min</span><span class="badge-soft">meal prep</span></div>
+            <img class="instruction-img" src="images/recipe-stuffed-peppers.jpg" alt="Buffalo chicken stuffed bell peppers with yogurt ranch and green onions." loading="lazy" width="800" height="600" />
+            <h4>Buffalo Chicken Stuffed Peppers</h4>
+            <p>Bell peppers filled with shredded chicken, cauliflower rice, buffalo sauce, and Greek yogurt ranch.</p>
+            <details><summary>Ingredients</summary><ul><li>2 bell peppers, 2 cups shredded chicken, cauliflower rice</li><li>Buffalo sauce, Greek yogurt, ranch seasoning, green onions</li></ul></details>
+            <details><summary>Instructions</summary><ol><li>Halve peppers and bake for 10 minutes.</li><li>Mix chicken, cauliflower rice, buffalo sauce, and yogurt ranch.</li><li>Fill peppers and bake until hot. Top with green onions.</li></ol></details>
+          </article>
+
+          <article class="instruction-card">
+            <div class="instruction-top"><span class="badge-soft">22 min</span><span class="badge-soft">comfort food</span></div>
+            <img class="instruction-img" src="images/recipe-turkey-meatballs.jpg" alt="Turkey meatball marinara bowl with zucchini ribbons, spaghetti squash, parmesan, and basil." loading="lazy" width="800" height="600" />
+            <h4>Turkey Meatball Marinara Bowls</h4>
+            <p>Lean turkey meatballs with marinara, zucchini, and a small portion of pasta or spaghetti squash.</p>
+            <details><summary>Ingredients</summary><ul><li>1 lb ground turkey, egg, breadcrumbs, Italian seasoning</li><li>Marinara, zucchini, parmesan, basil</li></ul></details>
+            <details><summary>Instructions</summary><ol><li>Mix turkey, egg, breadcrumbs, and seasoning. Form meatballs.</li><li>Brown meatballs, then simmer in marinara until cooked.</li><li>Serve with sautéed zucchini and parmesan.</li></ol></details>
+          </article>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-library-cta" style="margin-top:36px">
+      <p>These are the web-preview recipes from your package. Your full PDF with meal plans, grocery lists, prep calendar, and printable layouts was sent to your checkout email.</p>
+      <a class="btn btn-primary" href="/">Back to All Recipe Diet</a>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-bottom">
+    <small>&copy; <span id="year"></span> All Recipe Diet &middot; Created by Josh Danielson</small>
+    <small>Secure payments via Stripe</small>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+<script>
+(function () {
+  var form = document.getElementById('lookup-form');
+  var emailInput = document.getElementById('lookup-email');
+  var msg = document.getElementById('lookup-msg');
+  var lookupSection = document.getElementById('lookup');
+  var recipesSection = document.getElementById('recipes-content');
+  var pkgBadge = document.getElementById('pkg-badge');
+  var logoutBtn = document.getElementById('logout-btn');
+
+  function showRecipes(packageType) {
+    lookupSection.style.display = 'none';
+    recipesSection.classList.add('is-visible');
+    if (packageType === 'premium') {
+      recipesSection.classList.add('is-premium');
+      pkgBadge.textContent = 'Premium';
+    } else {
+      recipesSection.classList.remove('is-premium');
+      pkgBadge.textContent = 'Starter';
+    }
+    window.scrollTo({ top: 0 });
+  }
+
+  function showLookup() {
+    recipesSection.classList.remove('is-visible', 'is-premium');
+    lookupSection.style.display = '';
+    emailInput.value = '';
+    msg.textContent = '';
+    msg.classList.remove('is-error');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = emailInput.value.trim();
+    if (!email) return;
+
+    msg.textContent = 'Checking your purchase...';
+    msg.classList.remove('is-error');
+
+    var submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+
+    fetch('/api/verify-purchase', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      submitBtn.disabled = false;
+      if (data.found) {
+        showRecipes(data.packageType);
+      } else {
+        msg.textContent = 'No purchase found for that email. Check your spelling, or try the email you used at Stripe checkout.';
+        msg.classList.add('is-error');
+      }
+    })
+    .catch(function () {
+      submitBtn.disabled = false;
+      msg.textContent = 'Something went wrong. Please try again.';
+      msg.classList.add('is-error');
+    });
+  });
+
+  logoutBtn.addEventListener('click', showLookup);
+})();
+</script>
+</body>
+</html>
