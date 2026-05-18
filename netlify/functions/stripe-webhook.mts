@@ -35,6 +35,11 @@ function getPackage(
     return { name: "Premium Plan", path: "/downloads/premium-plan.html" };
   }
   if (amountCents === 1900) {
+    // Starter and Gluten-Free are both $19; without a payment link ID we
+    // cannot distinguish them. Default to Starter but log for investigation.
+    console.warn(
+      "Ambiguous $19 purchase without payment_link — defaulting to Starter Plan"
+    );
     return { name: "Starter Plan", path: "/downloads/starter-plan.html" };
   }
 
