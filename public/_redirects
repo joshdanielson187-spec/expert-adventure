@@ -2,4 +2,10 @@
 /thank-you /success.html 200
 /thanks /success.html 200
 /cancel /cancel.html 200
+
+# PDF download redirects - serve HTML recipe pages at .pdf URLs
+/downloads/starter-plan.pdf /downloads/starter-plan.html 200
+/downloads/premium-plan.pdf /downloads/premium-plan.html 200
+/downloads/gluten-free-starter.pdf /downloads/gluten-free-starter.html 200
+
 /* /404.html 404
