@@ -1,42 +1,42 @@
 import type { Config, Context } from "@netlify/functions";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-const SITE_URL = "https://all-recipe-diet.org";
-
 interface PackageInfo {
   name: string;
   path: string;
 }
 
+const PACKAGES: Record<string, PackageInfo> = {
+  starter: { name: "Starter Plan", path: "/downloads/starter-plan.html" },
+  premium: { name: "Premium Plan", path: "/downloads/premium-plan.html" },
+  glutenfree: { name: "Gluten Free Plan", path: "/downloads/gluten-free-starter.html" },
+};
+
+function getSiteUrl(): string {
+  return Netlify.env.get("URL") || Netlify.env.get("SITE_URL") || "https://all-recipe-diet.org";
+}
+
 function getPackage(
   paymentLinkId: string | null,
-  amountCents: number
+  amountCents: number,
+  metadata?: Record<string, string> | null
 ): PackageInfo | null {
   const plinkStarter = Netlify.env.get("STRIPE_PLINK_STARTER");
   const plinkPremium = Netlify.env.get("STRIPE_PLINK_PREMIUM");
   const plinkGlutenFree = Netlify.env.get("STRIPE_PLINK_GLUTENFREE");
 
   if (paymentLinkId) {
-    if (plinkStarter && paymentLinkId === plinkStarter) {
-      return { name: "Starter Plan", path: "/downloads/starter-plan.html" };
-    }
-    if (plinkPremium && paymentLinkId === plinkPremium) {
-      return { name: "Premium Plan", path: "/downloads/premium-plan.html" };
-    }
-    if (plinkGlutenFree && paymentLinkId === plinkGlutenFree) {
-      return {
-        name: "Gluten Free Plan",
-        path: "/downloads/gluten-free-starter.html",
-      };
-    }
+    if (plinkStarter && paymentLinkId === plinkStarter) return PACKAGES.starter;
+    if (plinkPremium && paymentLinkId === plinkPremium) return PACKAGES.premium;
+    if (plinkGlutenFree && paymentLinkId === plinkGlutenFree) return PACKAGES.glutenfree;
   }
 
-  if (amountCents === 2900) {
-    return { name: "Premium Plan", path: "/downloads/premium-plan.html" };
+  if (metadata?.package) {
+    const key = metadata.package.toLowerCase();
+    if (PACKAGES[key]) return PACKAGES[key];
   }
-  if (amountCents === 1900) {
-    return { name: "Starter Plan", path: "/downloads/starter-plan.html" };
-  }
+
+  if (amountCents === 2900) return PACKAGES.premium;
 
   return null;
 }
@@ -81,7 +81,7 @@ async function sendRecipeEmail(
 
   const fromEmail =
     Netlify.env.get("FROM_EMAIL") || "recipes@all-recipe-diet.org";
-  const downloadUrl = `${SITE_URL}${pkg.path}`;
+  const downloadUrl = `${getSiteUrl()}${pkg.path}`;
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -172,7 +172,7 @@ export default async (req: Request, context: Context) => {
     return new Response(JSON.stringify({ received: true }), { status: 200 });
   }
 
-  const pkg = getPackage(session.payment_link || null, session.amount_total);
+  const pkg = getPackage(session.payment_link || null, session.amount_total, session.metadata);
 
   if (!pkg) {
     console.error(
