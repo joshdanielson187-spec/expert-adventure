@@ -1,6 +1,12 @@
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  
 [build]
   publish = "public"
 functions = "netlify/functions"
+
 [[headers]]
   for = "/*"
   [headers.values]
