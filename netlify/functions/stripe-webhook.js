@@ -2,10 +2,15 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
-  const sig = event.headers['stripe-signature'] || event.headers['Stripe-Signature'];
-  const body = event.body;
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const sig =
+  event.headers['stripe-signature'] ||
+  event.headers['Stripe-Signature'];
 
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+const body = event.isBase64Encoded
+  ? Buffer.from(event.body, 'base64').toString('utf8')
+  : event.body;
   // Verify webhook signature
   let stripeEvent;
   if (!sig || !webhookSecret) {
