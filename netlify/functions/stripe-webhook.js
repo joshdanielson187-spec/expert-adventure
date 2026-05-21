@@ -25,7 +25,7 @@ const body = event.isBase64Encoded
 }
   try {
     stripeEvent = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-  catch (err) {
+  } catch (err) {
   console.error(`Webhook signature verification failed: ${err.message}`);
 
   return {
