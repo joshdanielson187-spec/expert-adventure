@@ -2,22 +2,34 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
-  const sig = event.headers['stripe-signature'];
+  const sig = event.headers['stripe-signature'] || event.headers['Stripe-Signature'];
   const body = event.body;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   // Verify webhook signature
   let stripeEvent;
+  if (!sig || !webhookSecret) {
+  console.error('Missing Stripe signature or webhook secret');
+
+  return {
+    statusCode: 401,
+    body: JSON.stringify({
+      error: 'Missing Stripe signature or webhook secret'
+    }),
+  };
+}
   try {
     stripeEvent = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-  } catch (err) {
-    console.error(`Webhook signature verification failed: ${err.message}`);
-    return {
-      statusCode: 401,
-      body: JSON.stringify({ error: 'Webhook signature verification failed' }),
-    };
-  }
+  catch (err) {
+  console.error(`Webhook signature verification failed: ${err.message}`);
 
+  return {
+    statusCode: 401,
+    body: JSON.stringify({
+      error: `Webhook signature verification failed: ${err.message}`
+    }),
+  };
+}
   // Handle checkout.session.completed event
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object;
