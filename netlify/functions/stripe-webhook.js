@@ -8,6 +8,10 @@ const sig =
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+console.log('Webhook received');
+console.log('Has signature:', !!sig);
+console.log('Has webhook secret:', !!webhookSecret);
+console.log('Is base64:', event.isBase64Encoded);
 const body = event.isBase64Encoded
   ? Buffer.from(event.body, 'base64').toString('utf8')
   : event.body;
@@ -17,7 +21,7 @@ const body = event.isBase64Encoded
   console.error('Missing Stripe signature or webhook secret');
 
   return {
-    statusCode: 401,
+    statusCode: 400,
     body: JSON.stringify({
       error: 'Missing Stripe signature or webhook secret'
     }),
@@ -29,7 +33,7 @@ const body = event.isBase64Encoded
   console.error(`Webhook signature verification failed: ${err.message}`);
 
   return {
-    statusCode: 401,
+    statusCode: 400,
     body: JSON.stringify({
       error: `Webhook signature verification failed: ${err.message}`
     }),
