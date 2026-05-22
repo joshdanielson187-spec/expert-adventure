@@ -1,6 +1,12 @@
 [build]
   publish = "public"
-functions = "netlify/functions"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/stripe-webhook"
+  to = "/.netlify/functions/stripe-webhook"
+  status = 200
+  force = true
 
 [[headers]]
   for = "/*"
