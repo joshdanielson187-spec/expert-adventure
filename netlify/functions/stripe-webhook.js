@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const STARTER_PAYMENT_LINK_ID = "plink_1TTmthHHJHOb4J4jVWRDRXQY";
 const PREMIUM_PAYMENT_LINK_ID = "plink_1TTmthHHJHOb4J4jRLkHKP3J";
@@ -7,6 +8,9 @@ const SITE_URL = (process.env.SITE_URL || "https://all-recipe-diet.org").replace
 const STARTER_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/starter-package-9f4d2a7c.html`;
 const PREMIUM_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/premium-package-c8e7b3a1.html`;
 const GLUTEN_FREE_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/gluten-free-package-a6c91d2f.html`;
+
+// Payout configuration - takes a percentage fee before sending to your bank
+const PAYOUT_PERCENTAGE = 0.95; // Send 95%, keep 5% for fees/costs
 
 function timingSafeEqual(a, b) {
   const aBuffer = Buffer.from(a);
@@ -95,6 +99,74 @@ function getPackageFromSession(session) {
   };
 }
 
+async function processBankPayout(session, packageInfo) {
+  const stripeConnectAccountId = process.env.STRIPE_CONNECTED_ACCOUNT_ID;
+
+  // If no connected account, skip payout but log it
+  if (!stripeConnectAccountId) {
+    console.log("STRIPE_CONNECTED_ACCOUNT_ID not configured. Payout not processed.", {
+      sessionId: session.id,
+      amount: session.amount_total,
+      currency: session.currency,
+    });
+    return { configured: false, processed: false, reason: "account_not_configured" };
+  }
+
+  try {
+    // Verify payment was actually captured
+    if (session.payment_status !== "paid") {
+      console.warn("Payment not yet captured. Skipping payout.", { sessionId: session.id, status: session.payment_status });
+      return { configured: true, processed: false, reason: "payment_not_captured" };
+    }
+
+    // Calculate payout amount (after fees)
+    const payoutAmount = Math.round(session.amount_total * PAYOUT_PERCENTAGE);
+    
+    // Create payout to connected account
+    const payout = await stripe.payouts.create(
+      {
+        amount: payoutAmount,
+        currency: session.currency.toLowerCase(),
+        description: `Payment for ${packageInfo.packageName} (Order: ${session.id})`,
+        metadata: {
+          checkout_session_id: session.id,
+          package_key: packageInfo.packageKey,
+          original_amount: session.amount_total,
+          fee_amount: session.amount_total - payoutAmount,
+        },
+      },
+      { stripeAccount: stripeConnectAccountId }
+    );
+
+    console.log("Bank payout processed successfully", {
+      payoutId: payout.id,
+      amount: payoutAmount,
+      status: payout.status,
+      sessionId: session.id,
+    });
+
+    return {
+      configured: true,
+      processed: true,
+      payoutId: payout.id,
+      status: payout.status,
+      amount: payoutAmount,
+    };
+  } catch (error) {
+    console.error("Bank payout error", {
+      error: error.message,
+      sessionId: session.id,
+      amount: session.amount_total,
+    });
+
+    return {
+      configured: true,
+      processed: false,
+      error: error.message,
+    };
+  }
+}
+
 async function notifyDeliveryAutomation(payload) {
   const deliveryWebhookUrl = process.env.DELIVERY_WEBHOOK_URL;
 
@@ -119,8 +191,8 @@ async function notifyDeliveryAutomation(payload) {
 
 function buildRecipeEmailHtml(payload) {
   const downloadButton = payload.deliveryUrl
-    ? `<a href="${payload.deliveryUrl}" style="display:inline-block;background:#1f7a4d;color:#ffffff;text-decoration:none;padding:14px 20px;border-radius:999px;font-weight:700;margin:18px 0;">Download your recipes</a>`
-    : `<p style="background:#fff6df;border:1px solid #f0d48a;border-radius:14px;padding:14px 16px;color:#5b4420;">Your recipe package is being prepared. Please reply to this email if you need help accessing it.</p>`;
+    ? `<a href="${payload.deliveryUrl}" style="display:inline-block;background:#1f7a4d;color:#ffffff;text-decoration:none;padding:14px 20px;border-radius:999px;font-weight:700;margin:18px 0;">Download Your Recipes</a>`
+    : `<p style="background:#fff6df;border:1px solid #f0d48a;border-radius:14px;padding:14px 16px;color:#5b4420;">Your recipe package is being prepared. Please reply to this email if you need help.</p>`;
 
   return `<!doctype html>
 <html>
@@ -139,7 +211,7 @@ function buildRecipeEmailHtml(payload) {
               <td style="padding:0 28px 28px;">
                 <p style="font-size:16px;line-height:1.6;margin:16px 0;">Thank you for your purchase${payload.customerName ? `, ${payload.customerName}` : ""}. You bought the <strong>${payload.packageName}</strong>.</p>
                 ${downloadButton}
-                <p style="font-size:14px;line-height:1.6;color:#647067;margin:16px 0 0;">Keep this email so you can come back to your recipe package later. If the button does not work, copy and paste this link into your browser:</p>
+                <p style="font-size:14px;line-height:1.6;color:#647067;margin:16px 0 0;">Keep this email so you can come back to your recipe package later. If the button does not work, copy and paste the link below into your browser.</p>
                 <p style="font-size:13px;line-height:1.5;word-break:break-all;color:#1f7a4d;margin:8px 0 0;">${payload.deliveryUrl || "Delivery link not configured yet."}</p>
               </td>
             </tr>
@@ -243,7 +315,7 @@ exports.handler = async (event) => {
   if (!isValidSignature) {
     console.warn("Invalid Stripe webhook signature.");
     return {
-      statusCode: 400,
+      statusCode: 401,
       body: JSON.stringify({ error: "Invalid signature" }),
     };
   }
@@ -288,11 +360,19 @@ exports.handler = async (event) => {
   };
 
   try {
-    const [deliveryResult, emailResult] = await Promise.all([
+    // Process all actions in parallel: delivery, email, and bank payout
+    const [deliveryResult, emailResult, payoutResult] = await Promise.all([
       notifyDeliveryAutomation(deliveryPayload),
       sendRecipeEmail(deliveryPayload),
+      processBankPayout(session, packageInfo),
     ]);
-    console.log("Stripe checkout completed", { ...deliveryPayload, deliveryResult, emailResult });
+
+    console.log("Stripe checkout completed", {
+      ...deliveryPayload,
+      deliveryResult,
+      emailResult,
+      payoutResult,
+    });
 
     return {
       statusCode: 200,
@@ -302,14 +382,20 @@ exports.handler = async (event) => {
         deliveryAutomationConfigured: deliveryResult.configured,
         recipeEmailConfigured: emailResult.configured,
         recipeEmailSent: Boolean(emailResult.sent),
+        bankPayoutConfigured: payoutResult.configured,
+        bankPayoutProcessed: payoutResult.processed,
+        payoutId: payoutResult.payoutId || null,
       }),
     };
   } catch (error) {
-    console.error("Delivery automation error", error);
+    console.error("Webhook processing error", error);
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Payment received, but delivery automation failed." }),
+      body: JSON.stringify({
+        error: "Payment received, but processing failed.",
+        details: error.message,
+      }),
     };
   }
 };
