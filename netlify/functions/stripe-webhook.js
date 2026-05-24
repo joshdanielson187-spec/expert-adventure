@@ -4,7 +4,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const STARTER_PAYMENT_LINK_ID = "plink_1TTmthHHJHOb4J4jVWRDRXQY";
 const PREMIUM_PAYMENT_LINK_ID = "plink_1TTmthHHJHOb4J4jRLkHKP3J";
 const GLUTEN_FREE_PAYMENT_LINK_ID = "plink_1TXq65HHJHOb4J4j0SrDA1sK";
-const SITE_URL = (process.env.SITE_URL || "https://all-recipe-diet.netlify.app").replace(/\/$/, "");
+const SITE_URL = (process.env.SITE_URL || "https://all-recipe-diet.org").replace(/\/$/, "");
 const STARTER_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/starter-package-9f4d2a7c.html`;
 const PREMIUM_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/premium-package-c8e7b3a1.html`;
 const GLUTEN_FREE_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/gluten-free-package-a6c91d2f.html`;
@@ -89,6 +89,14 @@ function getPackageFromSession(session) {
       packageName: "All Recipe Diet Premium Package",
       packageKey: "premium",
       deliveryUrl: process.env.PREMIUM_DELIVERY_URL || PREMIUM_DEFAULT_DELIVERY_URL,
+    };
+  }
+
+  if (session.amount_total === 1900) {
+    return {
+      packageName: "All Recipe Diet Gluten-Free Package",
+      packageKey: "gluten-free",
+      deliveryUrl: process.env.GLUTEN_FREE_DELIVERY_URL || GLUTEN_FREE_DEFAULT_DELIVERY_URL,
     };
   }
 
@@ -196,76 +204,31 @@ function buildRecipeEmailHtml(payload) {
 
   return `<!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Recipe Package is Ready</title>
-  </head>
-  <body style="margin:0;padding:0;background:#f8f5ef;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;color:#26342b;">
+  <body style="margin:0;background:#f8f5ef;font-family:Arial,Helvetica,sans-serif;color:#26342b;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8f5ef;padding:28px 12px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;background:#ffffff;border-radius:22px;overflow:hidden;border:1px solid #e7dfd2;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-            <!-- Header -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;background:#ffffff;border-radius:22px;overflow:hidden;border:1px solid #e7dfd2;">
             <tr>
-              <td style="padding:28px 28px 14px;background:linear-gradient(135deg, #1f7a4d 0%, #165a39 100%);">
-                <p style="margin:0 0 8px;color:#ffffff;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">All Recipe Diet</p>
-                <h1 style="margin:0;font-size:32px;line-height:1.2;color:#ffffff;font-weight:700;">Your Recipe Package is Ready!</h1>
+              <td style="padding:28px 28px 14px;">
+                <p style="margin:0 0 8px;color:#1f7a4d;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">All Recipe Diet</p>
+                <h1 style="margin:0;font-size:30px;line-height:1.1;color:#26342b;">Your recipe package is ready.</h1>
               </td>
             </tr>
-            <!-- Body -->
             <tr>
-              <td style="padding:28px 28px;">
-                <p style="font-size:16px;line-height:1.6;margin:16px 0 0 0;color:#26342b;">
-                  Hello${payload.customerName ? `, ${payload.customerName}` : ""},
-                </p>
-                <p style="font-size:16px;line-height:1.6;margin:16px 0;color:#26342b;">
-                  Thank you for purchasing the <strong style="color:#1f7a4d;">${payload.packageName}</strong>! 
-                  Your recipes are ready to download and start using right away.
-                </p>
-                <div style="background:#f0f8f4;border-left:4px solid #1f7a4d;padding:18px;border-radius:8px;margin:20px 0;">
-                  <p style="margin:0;color:#165a39;font-weight:600;">📦 Package Details:</p>
-                  <p style="margin:8px 0 0 0;color:#26342b;font-size:14px;">Type: ${payload.packageName}</p>
-                  <p style="margin:4px 0 0 0;color:#26342b;font-size:14px;">Order ID: ${payload.checkoutSessionId}</p>
-                </div>
+              <td style="padding:0 28px 28px;">
+                <p style="font-size:16px;line-height:1.6;margin:16px 0;">Thank you for your purchase${payload.customerName ? `, ${payload.customerName}` : ""}. You bought the <strong>${payload.packageName}</strong>.</p>
                 ${downloadButton}
-                <p style="font-size:13px;line-height:1.5;color:#647067;margin:16px 0 0;border-top:1px solid #e7dfd2;padding-top:16px;">
-                  <strong>Link not working?</strong> Copy and paste this URL into your browser:
-                </p>
-                <p style="font-size:12px;line-height:1.5;word-break:break-all;color:#1f7a4d;margin:8px 0 0;background:#f5f5f5;padding:12px;border-radius:6px;font-family:'Courier New', monospace;">
-                  ${payload.deliveryUrl || "Delivery link is being prepared..."}
-                </p>
-                <p style="font-size:13px;line-height:1.5;color:#647067;margin:16px 0 0;">
-                  💡 Save this email so you can access your recipes anytime. You can always download them again using the link above.
-                </p>
+                <p style="font-size:14px;line-height:1.6;color:#647067;margin:16px 0 0;">Keep this email so you can come back to your recipe package later. If the button does not work, copy and paste the link below into your browser.</p>
+                <p style="font-size:13px;line-height:1.5;word-break:break-all;color:#1f7a4d;margin:8px 0 0;">${payload.deliveryUrl || "Delivery link not configured yet."}</p>
               </td>
             </tr>
-            <!-- CTA Section -->
             <tr>
-              <td style="padding:24px 28px;background:#f8f5ef;border-top:1px solid #e7dfd2;">
-                <p style="margin:0 0 12px;color:#26342b;font-weight:600;font-size:14px;">Need Help?</p>
-                <p style="margin:0;color:#647067;font-size:13px;line-height:1.6;">
-                  If you have any questions or need assistance, please don't hesitate to reach out to our support team.
-                </p>
-              </td>
-            </tr>
-            <!-- Footer -->
-            <tr>
-              <td style="background:#26342b;color:#ffffff;padding:24px 28px;font-size:12px;line-height:1.6;text-align:center;">
-                <p style="margin:0 0 8px;">All Recipe Diet by Josh Danielson</p>
-                <p style="margin:0;color:#a8a8a8;">
-                  <a href="https://all-recipe-diet.netlify.app" style="color:#a8a8a8;text-decoration:none;">Visit Our Website</a> | 
-                  <a href="mailto:support@allrecipediet.com" style="color:#a8a8a8;text-decoration:none;">Contact Support</a>
-                </p>
-                <p style="margin:12px 0 0;color:#666666;font-size:11px;">
-                  Order Reference: ${payload.checkoutSessionId}
-                </p>
+              <td style="background:#26342b;color:#ffffff;padding:18px 28px;font-size:13px;line-height:1.5;">
+                All Recipe Diet by Josh Danielson. Order reference: ${payload.checkoutSessionId}
               </td>
             </tr>
           </table>
-          <p style="margin:16px 0 0;color:#a8a8a8;font-size:11px;text-align:center;">
-            © 2026 All Recipe Diet. All rights reserved.
-          </p>
         </td>
       </tr>
     </table>
@@ -275,109 +238,63 @@ function buildRecipeEmailHtml(payload) {
 
 function buildRecipeEmailText(payload) {
   return [
-    "ALL RECIPE DIET",
-    "Your Recipe Package is Ready!",
+    "All Recipe Diet",
     "",
-    `Hello${payload.customerName ? `, ${payload.customerName}` : ""},`,
+    `Thank you${payload.customerName ? `, ${payload.customerName}` : ""}. Your ${payload.packageName} is ready.`,
     "",
-    `Thank you for purchasing the ${payload.packageName}!`,
-    "Your recipes are ready to download and start using right away.",
-    "",
-    "PACKAGE DETAILS:",
-    `- Type: ${payload.packageName}`,
-    `- Order ID: ${payload.checkoutSessionId}`,
-    "",
-    "DOWNLOAD YOUR RECIPES:",
     payload.deliveryUrl
-      ? `${payload.deliveryUrl}`
-      : "Your recipe download link is being prepared. Please check back shortly.",
+      ? `Download your recipes here: ${payload.deliveryUrl}`
+      : "Your recipe package delivery link is not configured yet. Please reply for help.",
     "",
-    "NEED HELP?",
-    "If you have any questions or need assistance, please reach out to our support team.",
-    "",
-    "Save this email so you can access your recipes anytime!",
-    "",
-    "---",
-    "All Recipe Diet by Josh Danielson",
-    "https://all-recipe-diet.netlify.app",
-    `Order Reference: ${payload.checkoutSessionId}`,
-    "© 2026 All Recipe Diet. All rights reserved.",
+    `Order reference: ${payload.checkoutSessionId}`,
   ].join("\n");
 }
 
 async function sendRecipeEmail(payload) {
   const resendApiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.FROM_EMAIL || "All Recipe Diet <noreply@allrecipediet.com>";
-  const replyToEmail = process.env.REPLY_TO_EMAIL || "support@allrecipediet.com";
+  const fromEmail = process.env.FROM_EMAIL || "All Recipe Diet <onboarding@resend.dev>";
+  const replyToEmail = process.env.REPLY_TO_EMAIL || "";
 
   if (!resendApiKey) {
-    console.error("RESEND_API_KEY not configured. Recipe email NOT sent.", {
-      customerEmail: payload.customerEmail,
-      packageKey: payload.packageKey,
-    });
-    return { configured: false, sent: false, reason: "api_key_missing" };
+    console.log("RESEND_API_KEY not configured. Recipe email not sent.", payload);
+    return { configured: false };
   }
 
   if (!payload.customerEmail) {
-    console.warn("No customer email found on checkout session. Recipe email not sent.", {
-      sessionId: payload.checkoutSessionId,
-      packageKey: payload.packageKey,
-    });
+    console.warn("No customer email found on checkout session. Recipe email not sent.", payload);
     return { configured: true, sent: false, reason: "missing_customer_email" };
   }
 
-  try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${resendApiKey}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: [payload.customerEmail],
-        reply_to: replyToEmail,
-        subject: `🎉 Your ${payload.packageName} is Ready to Download`,
-        html: buildRecipeEmailHtml(payload),
-        text: buildRecipeEmailText(payload),
-        tags: [
-          { name: "website", value: "all-recipe-diet" },
-          { name: "package", value: payload.packageKey },
-          { name: "type", value: "order-confirmation" },
-        ],
-      }),
-    });
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${resendApiKey}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      from: fromEmail,
+      to: [payload.customerEmail],
+      reply_to: replyToEmail || undefined,
+      subject: `Your ${payload.packageName} is ready`,
+      html: buildRecipeEmailHtml(payload),
+      text: buildRecipeEmailText(payload),
+      tags: [
+        { name: "website", value: "all-recipe-diet" },
+        { name: "package", value: payload.packageKey },
+      ],
+    }),
+  });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Resend API error ${response.status}: ${errorText}`);
-    }
+  const responseText = await response.text();
 
-    const responseData = await response.json();
-
-    console.log("Recipe email sent successfully", {
-      messageId: responseData.id,
-      to: payload.customerEmail,
-      package: payload.packageKey,
-      sessionId: payload.checkoutSessionId,
-    });
-
-    return { configured: true, sent: true, messageId: responseData.id };
-  } catch (error) {
-    console.error("Failed to send recipe email", {
-      error: error.message,
-      customerEmail: payload.customerEmail,
-      packageKey: payload.packageKey,
-      sessionId: payload.checkoutSessionId,
-    });
-
-    return { configured: true, sent: false, error: error.message };
+  if (!response.ok) {
+    throw new Error(`Resend email failed with ${response.status}: ${responseText}`);
   }
+
+  return { configured: true, sent: true, response: responseText };
 }
 
 exports.handler = async (event) => {
-  console.log("Webhook event received", { type: event.httpMethod });
-
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -423,10 +340,7 @@ exports.handler = async (event) => {
     };
   }
 
-  console.log("Stripe event parsed", { type: stripeEvent.type, id: stripeEvent.id });
-
   if (stripeEvent.type !== "checkout.session.completed") {
-    console.log("Event ignored - not checkout.session.completed", { type: stripeEvent.type });
     return {
       statusCode: 200,
       body: JSON.stringify({ received: true, ignored: stripeEvent.type }),
@@ -436,13 +350,6 @@ exports.handler = async (event) => {
   const session = stripeEvent.data.object;
   const packageInfo = getPackageFromSession(session);
   const customerEmail = session.customer_details?.email || session.customer_email || "";
-
-  console.log("Processing checkout completion", {
-    sessionId: session.id,
-    package: packageInfo.packageKey,
-    customerEmail: customerEmail,
-    amount: session.amount_total,
-  });
 
   const deliveryPayload = {
     eventId: stripeEvent.id,
@@ -468,13 +375,11 @@ exports.handler = async (event) => {
       processBankPayout(session, packageInfo),
     ]);
 
-    console.log("Stripe checkout completed successfully", {
-      sessionId: session.id,
-      package: packageInfo.packageKey,
-      customerEmail: customerEmail,
-      deliveryConfigured: deliveryResult.configured,
-      emailSent: emailResult.sent,
-      payoutProcessed: payoutResult.processed,
+    console.log("Stripe checkout completed", {
+      ...deliveryPayload,
+      deliveryResult,
+      emailResult,
+      payoutResult,
     });
 
     return {
@@ -491,12 +396,7 @@ exports.handler = async (event) => {
       }),
     };
   } catch (error) {
-    console.error("Webhook processing error", {
-      error: error.message,
-      sessionId: session.id,
-      package: packageInfo.packageKey,
-      customerEmail: customerEmail,
-    });
+    console.error("Webhook processing error", error);
 
     return {
       statusCode: 500,
