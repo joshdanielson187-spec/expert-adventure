@@ -1,8 +1,5 @@
 {
-  "name": "all-recipe-diet",
-  "private": true,
-  "type": "module",
   "dependencies": {
-    "@netlify/functions": "^3.0.0"
+    "stripe": "latest"
   }
 }
