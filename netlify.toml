@@ -1,4 +1,7 @@
 [build]
+  publish = "."
+
+[database]
   publish = "public"
   functions = "netlify/functions"
 
