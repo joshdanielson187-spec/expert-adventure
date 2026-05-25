@@ -1,4 +1,10 @@
 {
+  "name": "all-recipe-diet",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/database": "^0.7.0",
+    "@netlify/functions": "^3.0.0"
   "dependencies": {
     "stripe": "latest"
   }
