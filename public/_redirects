@@ -1,0 +1,8 @@
+# Stripe webhook - must be first, force proxy to function
+/api/stripe-webhook  /.netlify/functions/stripe-webhook  200!
+
+/success /success.html 200
+/thank-you /success.html 200
+/thanks /success.html 200
+/cancel /cancel.html 200
+/* /404.html 404

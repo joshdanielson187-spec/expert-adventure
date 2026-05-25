@@ -1,0 +1,21 @@
+{
+  "name": "All Recipe Diet",
+  "short_name": "All Recipe Diet",
+  "description": "Healthy weight-loss recipe packages with secure Stripe checkout.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf6ee",
+  "theme_color": "#c8623d",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
