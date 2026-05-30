@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@netlify/functions": "^3.0.0"
+    "@netlify/database": "^0.7.0",
+    "@netlify/functions": "^3.0.0",
+    "stripe": "latest"
   }
 }
