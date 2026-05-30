@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Starter Plan - All Recipe Diet by Josh Danielson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ─── Reset & Base ────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #fbf6ee;
+  --cream-dark: #f3ece0;
+  --terra: #c8623d;
+  --terra-light: #e8956f;
+  --terra-dark: #a84e2e;
+  --brown: #1a140e;
+  --brown-mid: #3d3228;
+  --brown-light: #6b5d4f;
+  --white: #ffffff;
+  --border: #e0d6c8;
+  --shadow: rgba(26, 20, 14, 0.08);
+}
+
+html {
+  font-size: 16px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--cream);
+  color: var(--brown);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Fraunces', Georgia, serif;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Print Button Bar ────────────────────────── */
+.print-bar {
+  background: var(--brown);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.print-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.print-bar p {
+  color: var(--cream);
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--terra);
+  color: var(--white);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-print:hover {
+  background: var(--terra-dark);
+}
+
+.btn-print svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ─── Cover / Header ─────────────────────────── */
+.cover {
+  text-align: center;
+  padding: 64px 0 48px;
+  border-bottom: 2px solid var(--border);
+}
+
+.cover .eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 12px;
+}
+
+.cover h1 {
+  font-size: 2.75rem;
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.cover .subtitle {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.25rem;
+  color: var(--brown-light);
+  margin-bottom: 6px;
+}
+
+.cover .author {
+  font-size: 0.9375rem;
+  color: var(--brown-light);
+}
+
+.cover .author strong {
+  color: var(--brown);
+}
+
+.cover .divider {
+  width: 60px;
+  height: 3px;
+  background: var(--terra);
+  margin: 24px auto 0;
+  border-radius: 2px;
+}
+
+/* ─── Section Headings ────────────────────────── */
+.section-heading {
+  text-align: center;
+  padding: 48px 0 32px;
+}
+
+.section-heading h2 {
+  font-size: 2rem;
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.section-heading p {
+  color: var(--brown-light);
+  font-size: 1rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.section-heading .accent-line {
+  width: 40px;
+  height: 3px;
+  background: var(--terra);
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+/* ─── Meal Plan Table ─────────────────────────── */
+.meal-plan {
+  padding-bottom: 48px;
+  border-bottom: 2px solid var(--border);
+}
+
+.meal-plan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+
+.meal-plan-table thead th {
+  background: var(--brown);
+  color: var(--cream);
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 12px 10px;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+
+.meal-plan-table thead th:first-child {
+  width: 90px;
+}
+
+.meal-plan-table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.meal-plan-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.meal-plan-table tbody tr:nth-child(even) {
+  background: var(--cream);
+}
+
+.meal-plan-table .day-label {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  color: var(--terra);
+  white-space: nowrap;
+}
+
+/* ─── Recipe Cards ────────────────────────────── */
+.recipes-section {
+  padding-bottom: 24px;
+}
+
+.recipe-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px var(--shadow);
+  margin-bottom: 32px;
+  overflow: hidden;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.recipe-header {
+  background: var(--brown);
+  color: var(--cream);
+  padding: 20px 28px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.recipe-header h3 {
+  font-size: 1.25rem;
+  color: var(--cream);
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8125rem;
+  opacity: 0.85;
+}
+
+.recipe-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.recipe-body {
+  padding: 24px 28px;
+}
+
+.recipe-desc {
+  font-size: 0.9375rem;
+  color: var(--brown-light);
+  margin-bottom: 20px;
+  line-height: 1.55;
+  border-left: 3px solid var(--terra-light);
+  padding-left: 14px;
+}
+
+.recipe-columns {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 28px;
+}
+
+.recipe-columns h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--cream-dark);
+}
+
+.recipe-columns ul {
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.recipe-columns ul li {
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.recipe-columns ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  background: var(--terra-light);
+  border-radius: 50%;
+}
+
+.recipe-columns ol {
+  list-style: none;
+  counter-reset: steps;
+  font-size: 0.875rem;
+}
+
+.recipe-columns ol li {
+  counter-increment: steps;
+  padding: 6px 0 6px 32px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.recipe-columns ol li::before {
+  content: counter(steps);
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 22px;
+  height: 22px;
+  background: var(--terra);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Grocery List ────────────────────────────── */
+.grocery-section {
+  padding-bottom: 48px;
+  border-bottom: 2px solid var(--border);
+}
+
+.grocery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.grocery-category {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px var(--shadow);
+  padding: 24px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.grocery-category h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1rem;
+  color: var(--terra);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grocery-category ul {
+  list-style: none;
+  font-size: 0.875rem;
+  columns: 1;
+}
+
+.grocery-category ul li {
+  padding: 5px 0 5px 24px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.grocery-category ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border);
+  border-radius: 3px;
+  background: var(--white);
+}
+
+.grocery-category.wide {
+  grid-column: 1 / -1;
+}
+
+.grocery-category.wide ul {
+  columns: 2;
+  column-gap: 32px;
+}
+
+/* ─── Footer ──────────────────────────────────── */
+.doc-footer {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--brown-light);
+  font-size: 0.875rem;
+}
+
+.doc-footer strong {
+  color: var(--brown);
+}
+
+.doc-footer .terra {
+  color: var(--terra);
+}
+
+/* ─── Responsive ──────────────────────────────── */
+@media (max-width: 700px) {
+  .cover h1 { font-size: 2rem; }
+  .section-heading h2 { font-size: 1.5rem; }
+  .recipe-columns { grid-template-columns: 1fr; gap: 20px; }
+  .grocery-grid { grid-template-columns: 1fr; }
+  .grocery-category.wide ul { columns: 1; }
+  .meal-plan-table { font-size: 0.75rem; }
+  .meal-plan-table thead th,
+  .meal-plan-table tbody td { padding: 8px 6px; }
+  .recipe-header { padding: 16px 20px; }
+  .recipe-body { padding: 20px; }
+}
+
+/* ─── Print Styles ────────────────────────────── */
+@page {
+  size: letter;
+  margin: 0.6in 0.5in;
+}
+
+@media print {
+  html { font-size: 11pt; }
+
+  body {
+    background: white;
+    color: #1a140e;
+  }
+
+  .print-bar { display: none !important; }
+
+  .container { max-width: 100%; padding: 0; }
+
+  .cover { padding: 32px 0 24px; }
+  .cover h1 { font-size: 28pt; }
+
+  .section-heading { padding: 24px 0 16px; }
+
+  .recipe-card {
+    box-shadow: none;
+    border: 1px solid #d6cfc4;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .recipe-header {
+    background: #1a140e !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .recipe-columns ol li::before {
+    background: #c8623d !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .meal-plan-table {
+    box-shadow: none;
+    border: 1px solid #d6cfc4;
+  }
+
+  .meal-plan-table thead th {
+    background: #1a140e !important;
+    color: #fbf6ee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .grocery-category {
+    box-shadow: none;
+    border: 1px solid #d6cfc4;
+  }
+
+  .grocery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grocery-section,
+  .meal-plan {
+    border-bottom-color: #d6cfc4;
+  }
+
+  .section-heading,
+  .grocery-category,
+  .meal-plan {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== PRINT BUTTON BAR ====== -->
+<div class="print-bar">
+  <div class="container">
+    <p>Save this page as a PDF using Print &rarr; "Save as PDF"</p>
+    <button class="btn-print" onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / Save as PDF
+    </button>
+  </div>
+</div>
+
+<!-- ====== COVER ====== -->
+<section class="cover">
+  <div class="container">
+    <span class="eyebrow">All Recipe Diet</span>
+    <h1>Starter Plan</h1>
+    <p class="subtitle">14 Recipes &middot; 7-Day Meal Plan &middot; Grocery List</p>
+    <p class="author">Created by <strong>Josh Danielson</strong></p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<!-- ====== 7-DAY MEAL PLAN ====== -->
+<div class="section-heading">
+  <div class="container">
+    <h2>7-Day Meal Plan</h2>
+    <p>A flexible week of balanced meals using the 14 recipes below. Mix and match as you like.</p>
+    <div class="accent-line"></div>
+  </div>
+</div>
+
+<section class="meal-plan">
+  <div class="container">
+    <table class="meal-plan-table">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Breakfast</th>
+          <th>Lunch</th>
+          <th>Dinner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="day-label">Monday</td>
+          <td>Greek Yogurt Berry Bowl</td>
+          <td>Lemon Herb Chicken Bowl</td>
+          <td>Garlic Butter Chicken Skillet</td>
+        </tr>
+        <tr>
+          <td class="day-label">Tuesday</td>
+          <td>Egg-White Breakfast Skillet</td>
+          <td>Chickpea Power Salad</td>
+          <td>Salmon &amp; Avocado Plate</td>
+        </tr>
+        <tr>
+          <td class="day-label">Wednesday</td>
+          <td>Protein Overnight Oats</td>
+          <td>Mediterranean Tuna Salad</td>
+          <td>One-Pan Chicken &amp; Sweet Potato</td>
+        </tr>
+        <tr>
+          <td class="day-label">Thursday</td>
+          <td>Greek Yogurt Berry Bowl</td>
+          <td>Turkey Taco Lettuce Cups</td>
+          <td>Chicken Stir-Fry with Vegetables</td>
+        </tr>
+        <tr>
+          <td class="day-label">Friday</td>
+          <td>Egg-White Breakfast Skillet</td>
+          <td>Turkey &amp; Black Bean Bowl</td>
+          <td>Ground Turkey Stuffed Zucchini</td>
+        </tr>
+        <tr>
+          <td class="day-label">Saturday</td>
+          <td>Protein Overnight Oats</td>
+          <td>Lemon Herb Chicken Bowl</td>
+          <td>Asian Chicken Lettuce Wraps</td>
+        </tr>
+        <tr>
+          <td class="day-label">Sunday</td>
+          <td>Greek Yogurt Berry Bowl</td>
+          <td>Mediterranean Tuna Salad</td>
+          <td>Garlic Butter Chicken Skillet</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== RECIPES ====== -->
+<div class="section-heading">
+  <div class="container">
+    <h2>The Recipes</h2>
+    <p>14 simple, high-protein recipes designed for sustainable weight loss. Real food you will actually want to cook.</p>
+    <div class="accent-line"></div>
+  </div>
+</div>
+
+<section class="recipes-section">
+  <div class="container">
+
+    <!-- ── Recipe 1 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>1. Garlic Butter Chicken Skillet</h3>
+        <div class="recipe-meta">
+          <span>15 min</span>
+          <span>4 servings</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Tender chicken cutlets seasoned with paprika and thyme, seared golden, then finished in a rich garlic butter honey sauce. A weeknight staple that tastes like a restaurant dish.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 chicken breasts (sliced into 4 cutlets)</li>
+              <li>Salt, to taste</li>
+              <li>1 tsp paprika</li>
+              <li>1 tsp dried thyme</li>
+              <li>1 tsp garlic powder</li>
+              <li>1 tsp onion powder</li>
+              <li>Black pepper, to taste</li>
+              <li>1 tbsp olive oil</li>
+              <li>2 tbsp butter</li>
+              <li>3 cloves garlic, minced</li>
+              <li>1 tbsp honey</li>
+              <li>1 tsp Italian seasoning</li>
+              <li>Fresh parsley, chopped</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Slice chicken breasts in half horizontally to create 4 thin cutlets. Pat dry with paper towels.</li>
+              <li>Season both sides generously with salt, paprika, thyme, garlic powder, onion powder, and black pepper.</li>
+              <li>Heat olive oil in a large skillet over medium-high heat. Sear chicken cutlets for 2-3 minutes per side until golden brown and cooked through. Remove and set aside.</li>
+              <li>Reduce heat to medium. Add butter to the same skillet. Once melted, add minced garlic and cook for 30 seconds until fragrant.</li>
+              <li>Stir in honey and Italian seasoning. Return chicken to the skillet and spoon the garlic butter sauce over the top. Garnish with fresh parsley and serve.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 2 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>2. Lemon Herb Chicken Bowl</h3>
+        <div class="recipe-meta">
+          <span>25 min</span>
+          <span>42g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A satisfying quinoa bowl with charred broccoli, lemon-herb chicken, and creamy avocado. Bright, filling, and perfect for meal prep.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb chicken breast</li>
+              <li>2 cups quinoa, cooked</li>
+              <li>3 cups broccoli florets</li>
+              <li>1 avocado, sliced</li>
+              <li>1 lemon (juice + zest)</li>
+              <li>1 tbsp olive oil</li>
+              <li>Fresh parsley, chopped</li>
+              <li>1 tsp garlic powder</li>
+              <li>1 tsp dried oregano</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Season chicken breast with garlic powder, oregano, salt, pepper, and half the lemon juice. Sear in olive oil over medium-high heat for 5-6 minutes per side until cooked through. Let rest, then slice.</li>
+              <li>In the same pan, add broccoli florets and cook over high heat for 3-4 minutes until charred in spots but still crisp-tender.</li>
+              <li>Build bowls: divide cooked quinoa among bowls, top with sliced chicken, charred broccoli, and avocado slices.</li>
+              <li>Drizzle with remaining lemon juice, sprinkle with lemon zest and parsley. Serve immediately.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 3 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>3. Turkey Taco Lettuce Cups</h3>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>38g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">All the bold flavor of taco night with a fraction of the carbs. Seasoned ground turkey spooned into crisp romaine cups with fresh toppings.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb ground turkey</li>
+              <li>1 head romaine lettuce, separated into cups</li>
+              <li>1/2 cup salsa</li>
+              <li>1 tsp chili powder</li>
+              <li>1 tsp cumin</li>
+              <li>1 tsp paprika</li>
+              <li>1 cup diced tomatoes</li>
+              <li>Fresh cilantro, chopped</li>
+              <li>1 lime, cut into wedges</li>
+              <li>1/4 cup Greek yogurt (as topping)</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat a skillet over medium-high heat. Add ground turkey and cook, breaking it into crumbles, until fully browned (about 6-7 minutes).</li>
+              <li>Add chili powder, cumin, and paprika. Stir well and cook for another minute to let the spices bloom.</li>
+              <li>Stir in salsa and diced tomatoes. Simmer for 2-3 minutes until the mixture is heated through and slightly thickened.</li>
+              <li>Spoon turkey mixture into romaine lettuce cups. Top with cilantro, a squeeze of lime, and a dollop of Greek yogurt.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 4 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>4. Greek Yogurt Berry Bowl</h3>
+        <div class="recipe-meta">
+          <span>5 min</span>
+          <span>28g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">The fastest high-protein breakfast. Thick Greek yogurt layered with fresh berries, crunchy granola, and a drizzle of honey. Simple, satisfying, done.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1.5 cups nonfat Greek yogurt</li>
+              <li>1 cup mixed berries (fresh or frozen)</li>
+              <li>2 tbsp granola</li>
+              <li>1 tsp chia seeds</li>
+              <li>1 tsp honey</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Add Greek yogurt to a bowl.</li>
+              <li>Top with mixed berries, granola, and chia seeds.</li>
+              <li>Drizzle with honey and serve immediately.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 5 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>5. Salmon &amp; Avocado Plate</h3>
+        <div class="recipe-meta">
+          <span>22 min</span>
+          <span>40g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Crispy-skinned salmon alongside roasted asparagus, cool cucumber, and creamy avocado. A beautiful plate loaded with healthy fats and protein.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 salmon fillets (6 oz each)</li>
+              <li>1 avocado, sliced</li>
+              <li>1 bunch asparagus, trimmed</li>
+              <li>1/2 cucumber, sliced</li>
+              <li>1 lemon (juice + wedges)</li>
+              <li>1 tsp dried dill</li>
+              <li>1 tsp garlic powder</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Season salmon fillets with garlic powder, dill, salt, and pepper. Heat a skillet over medium-high heat and sear salmon skin-side down for 4 minutes, flip and cook 3 more minutes until golden and cooked through.</li>
+              <li>Toss asparagus with a drizzle of olive oil, salt, and pepper. Roast at 425&deg;F for 10-12 minutes until tender and lightly charred.</li>
+              <li>Plate salmon alongside roasted asparagus, sliced avocado, and cucumber. Squeeze lemon over everything and serve with lemon wedges.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 6 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>6. Chickpea Power Salad</h3>
+        <div class="recipe-meta">
+          <span>15 min</span>
+          <span>22g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A hearty meal-prep salad with massaged kale, protein-rich chickpeas, bright vegetables, and a creamy lemon-tahini dressing that gets better overnight.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 can (15 oz) chickpeas, drained and rinsed</li>
+              <li>4 cups kale, stems removed and chopped</li>
+              <li>1 cup cherry tomatoes, halved</li>
+              <li>1/2 cucumber, diced</li>
+              <li>1/4 cup crumbled feta cheese</li>
+              <li>2 tbsp tahini</li>
+              <li>1 lemon (juiced)</li>
+              <li>1 clove garlic, minced</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Place chopped kale in a large bowl. Add a pinch of salt and a squeeze of lemon juice. Massage with your hands for 1-2 minutes until the kale softens and deepens in color.</li>
+              <li>Add chickpeas, cherry tomatoes, cucumber, and crumbled feta to the kale. Toss gently to combine.</li>
+              <li>Whisk together tahini, remaining lemon juice, minced garlic, a splash of water, salt, and pepper until smooth and pourable.</li>
+              <li>Drizzle dressing over the salad and toss to coat. Serve immediately or refrigerate for meal prep.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 7 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>7. Egg-White Breakfast Skillet</h3>
+        <div class="recipe-meta">
+          <span>15 min</span>
+          <span>32g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A big-volume, low-calorie breakfast skillet packed with colorful vegetables and fluffy egg whites. High protein, high satisfaction.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1.5 cups egg whites</li>
+              <li>1 bell pepper, diced</li>
+              <li>1 cup mushrooms, sliced</li>
+              <li>2 cups fresh spinach</li>
+              <li>2 tbsp crumbled feta cheese</li>
+              <li>Cooking spray</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat a skillet over medium heat and coat with cooking spray. Add diced bell pepper and sliced mushrooms. Saut&eacute; for 3-4 minutes until softened.</li>
+              <li>Add spinach and cook for 1-2 minutes until wilted.</li>
+              <li>Pour egg whites over the vegetables. Cook, gently stirring, for 3-4 minutes until the egg whites are set and fluffy.</li>
+              <li>Top with crumbled feta cheese, season with salt and pepper, and serve hot.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 8 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>8. One-Pan Chicken &amp; Sweet Potato</h3>
+        <div class="recipe-meta">
+          <span>30 min</span>
+          <span>38g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Everything on one sheet pan, everything in the oven, minimal cleanup. Roasted sweet potatoes, seasoned chicken, and tender broccoli -- dinner made easy.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 chicken breasts</li>
+              <li>2 sweet potatoes, cubed</li>
+              <li>2 cups broccoli florets</li>
+              <li>1 tbsp olive oil</li>
+              <li>1 tsp garlic powder</li>
+              <li>1 tsp paprika</li>
+              <li>1 tsp Italian seasoning</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 425&deg;F. Line a sheet pan with parchment paper.</li>
+              <li>Toss cubed sweet potatoes with half the olive oil, garlic powder, paprika, salt, and pepper. Spread on the sheet pan and roast for 10 minutes.</li>
+              <li>Season chicken breasts with Italian seasoning, remaining garlic powder, salt, and pepper. Add chicken and broccoli florets (tossed with remaining olive oil) to the sheet pan.</li>
+              <li>Return to oven and bake for 20-25 minutes until chicken reaches 165&deg;F and sweet potatoes are tender. Slice chicken and serve everything together.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 9 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>9. Turkey &amp; Black Bean Bowl</h3>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>36g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A Tex-Mex-inspired bowl with seasoned ground turkey, warm black beans, fluffy rice, and all the fresh toppings. Big flavor, big protein.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb ground turkey</li>
+              <li>1 can (15 oz) black beans, drained and rinsed</li>
+              <li>1 cup rice, cooked</li>
+              <li>1 avocado, sliced</li>
+              <li>1/2 cup salsa</li>
+              <li>1 tsp cumin</li>
+              <li>1 tsp chili powder</li>
+              <li>1 lime, cut into wedges</li>
+              <li>Fresh cilantro, chopped</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat a skillet over medium-high heat. Cook ground turkey, breaking into crumbles, until browned (6-7 minutes).</li>
+              <li>Add cumin and chili powder. Stir and cook for 1 minute until fragrant.</li>
+              <li>Warm black beans in a small saucepan or in the microwave.</li>
+              <li>Build bowls: divide rice among bowls, top with seasoned turkey, warm black beans, sliced avocado, and salsa. Garnish with cilantro and a squeeze of lime.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 10 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>10. Mediterranean Tuna Salad</h3>
+        <div class="recipe-meta">
+          <span>10 min</span>
+          <span>34g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A bright, no-cook lunch that comes together in minutes. Protein-packed tuna tossed with Mediterranean vegetables, olives, and a simple lemon-olive oil dressing.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 cans (5 oz each) tuna, drained</li>
+              <li>1 cup cherry tomatoes, halved</li>
+              <li>1/2 cucumber, diced</li>
+              <li>1/4 red onion, thinly sliced</li>
+              <li>2 tbsp kalamata olives, halved</li>
+              <li>1 tbsp olive oil</li>
+              <li>1 lemon (juiced)</li>
+              <li>1/2 tsp dried oregano</li>
+              <li>4 cups mixed greens</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Drain tuna and flake into a large bowl with a fork.</li>
+              <li>Add halved cherry tomatoes, diced cucumber, sliced red onion, and kalamata olives to the bowl.</li>
+              <li>Drizzle with olive oil and lemon juice. Sprinkle with oregano, salt, and pepper. Toss gently to combine.</li>
+              <li>Divide mixed greens among plates and top with the tuna salad. Serve immediately.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 11 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>11. Chicken Stir-Fry with Vegetables</h3>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>35g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A quick weeknight stir-fry with tender chicken, crisp snap peas, and a savory-sweet tamari glaze. Better than takeout, ready in 20 minutes.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb chicken breast, sliced thin</li>
+              <li>2 cups snap peas</li>
+              <li>1 bell pepper, sliced</li>
+              <li>1 cup broccoli florets</li>
+              <li>2 tbsp tamari or soy sauce</li>
+              <li>1 tbsp honey</li>
+              <li>1 tsp sesame oil</li>
+              <li>2 cloves garlic, minced</li>
+              <li>1 tsp fresh ginger, grated</li>
+              <li>Cooked rice, for serving</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat a large skillet or wok over high heat with a drizzle of oil. Sear sliced chicken for 3-4 minutes until golden and cooked through. Remove and set aside.</li>
+              <li>In the same pan, stir-fry snap peas, bell pepper, and broccoli for 2-3 minutes until crisp-tender.</li>
+              <li>Add minced garlic and grated ginger, cook for 30 seconds until fragrant.</li>
+              <li>Whisk together tamari, honey, and sesame oil. Return chicken to the pan, pour in the sauce, and toss everything to coat. Serve over cooked rice.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 12 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>12. Protein Overnight Oats</h3>
+        <div class="recipe-meta">
+          <span>5 min prep</span>
+          <span>30g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Prep tonight, grab-and-go tomorrow. Creamy overnight oats packed with protein from Greek yogurt and protein powder, topped with fresh berries.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 cup rolled oats</li>
+              <li>1 cup Greek yogurt</li>
+              <li>1 cup milk</li>
+              <li>1 scoop vanilla protein powder</li>
+              <li>1 tbsp chia seeds</li>
+              <li>1/2 cup berries (for topping)</li>
+              <li>1 tsp honey</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>In a mason jar or container, combine rolled oats, Greek yogurt, milk, protein powder, and chia seeds. Stir until well mixed.</li>
+              <li>Seal and refrigerate overnight (or at least 4 hours).</li>
+              <li>In the morning, top with fresh berries and a drizzle of honey. Eat cold straight from the jar or warm in the microwave for 1-2 minutes.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 13 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>13. Ground Turkey Stuffed Zucchini</h3>
+        <div class="recipe-meta">
+          <span>25 min</span>
+          <span>34g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Hollowed-out zucchini boats loaded with savory seasoned turkey, diced tomatoes, and melted mozzarella. A low-carb dinner that feels indulgent.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>4 zucchini, halved lengthwise</li>
+              <li>1 lb ground turkey</li>
+              <li>1 can (14 oz) diced tomatoes</li>
+              <li>2 cloves garlic, minced</li>
+              <li>1 tsp Italian seasoning</li>
+              <li>1/2 cup shredded mozzarella cheese</li>
+              <li>Fresh basil, for garnish</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 400&deg;F. Use a spoon to scoop out the center of each zucchini half, creating a shallow boat. Place cut-side up on a lined baking sheet.</li>
+              <li>Brown ground turkey in a skillet over medium-high heat. Add minced garlic, Italian seasoning, salt, and pepper. Cook for 1 minute.</li>
+              <li>Stir in diced tomatoes and simmer for 2-3 minutes until slightly thickened. Spoon the turkey mixture into each zucchini boat.</li>
+              <li>Top with shredded mozzarella. Bake for 15 minutes until cheese is melted and bubbly and zucchini is tender. Garnish with fresh basil.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 14 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <h3>14. Asian Chicken Lettuce Wraps</h3>
+        <div class="recipe-meta">
+          <span>15 min</span>
+          <span>30g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Light but deeply satisfying lettuce wraps with savory ground chicken, crunchy water chestnuts, and a sweet-savory hoisin-ginger sauce. Addictively good.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb ground chicken</li>
+              <li>1 head butter lettuce, leaves separated</li>
+              <li>1 can (8 oz) water chestnuts, diced</li>
+              <li>3 green onions, sliced</li>
+              <li>2 cloves garlic, minced</li>
+              <li>1 tsp fresh ginger, grated</li>
+              <li>2 tbsp hoisin sauce</li>
+              <li>1 tbsp soy sauce</li>
+              <li>1 tsp rice vinegar</li>
+              <li>Sriracha, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat a skillet over medium-high heat with a drizzle of oil. Add ground chicken and cook, breaking into small crumbles, until browned (5-6 minutes).</li>
+              <li>Add minced garlic and grated ginger. Cook for 30 seconds until fragrant.</li>
+              <li>Stir in hoisin sauce, soy sauce, rice vinegar, and diced water chestnuts. Cook for 2 minutes, tossing to combine and heat through.</li>
+              <li>Spoon the chicken mixture into butter lettuce cups. Top with sliced green onions and a drizzle of sriracha. Serve immediately.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ====== GROCERY LIST ====== -->
+<div class="section-heading">
+  <div class="container">
+    <h2>Master Grocery List</h2>
+    <p>Everything you need for all 14 recipes, organized by category. Check off items as you shop.</p>
+    <div class="accent-line"></div>
+  </div>
+</div>
+
+<section class="grocery-section">
+  <div class="container">
+    <div class="grocery-grid">
+
+      <!-- Proteins -->
+      <div class="grocery-category">
+        <h4>Proteins</h4>
+        <ul>
+          <li>Chicken breasts (about 5 lbs total)</li>
+          <li>Ground turkey (3 lbs)</li>
+          <li>Ground chicken (1 lb)</li>
+          <li>Salmon fillets (2, about 6 oz each)</li>
+          <li>Canned tuna (2 cans, 5 oz each)</li>
+          <li>Egg whites (3+ cups / 1 carton)</li>
+          <li>Canned chickpeas (1 can, 15 oz)</li>
+          <li>Canned black beans (1 can, 15 oz)</li>
+        </ul>
+      </div>
+
+      <!-- Dairy & Eggs -->
+      <div class="grocery-category">
+        <h4>Dairy &amp; Eggs</h4>
+        <ul>
+          <li>Nonfat Greek yogurt (large tub, 32 oz)</li>
+          <li>Butter (1 stick / 4 tbsp)</li>
+          <li>Crumbled feta cheese (small container)</li>
+          <li>Shredded mozzarella cheese (1/2 cup)</li>
+          <li>Milk (1 cup)</li>
+          <li>Vanilla protein powder (1 scoop)</li>
+        </ul>
+      </div>
+
+      <!-- Produce -->
+      <div class="grocery-category wide">
+        <h4>Produce</h4>
+        <ul>
+          <li>Avocados (4)</li>
+          <li>Lemons (5)</li>
+          <li>Limes (2)</li>
+          <li>Broccoli florets (8+ cups)</li>
+          <li>Sweet potatoes (2 large)</li>
+          <li>Bell peppers (3)</li>
+          <li>Fresh spinach (2 cups)</li>
+          <li>Kale (1 bunch, about 4 cups)</li>
+          <li>Romaine lettuce (1 head)</li>
+          <li>Butter lettuce (1 head)</li>
+          <li>Mixed greens (4 cups)</li>
+          <li>Cherry tomatoes (2 cups)</li>
+          <li>Cucumber (2)</li>
+          <li>Mushrooms (1 cup)</li>
+          <li>Asparagus (1 bunch)</li>
+          <li>Snap peas (2 cups)</li>
+          <li>Zucchini (4)</li>
+          <li>Red onion (1)</li>
+          <li>Green onions (1 bunch)</li>
+          <li>Fresh garlic (2 heads)</li>
+          <li>Fresh ginger (1 small piece)</li>
+          <li>Fresh parsley (1 bunch)</li>
+          <li>Fresh cilantro (1 bunch)</li>
+          <li>Fresh basil (1 small bunch)</li>
+          <li>Fresh dill (optional, small bunch)</li>
+          <li>Mixed berries (1.5 cups)</li>
+        </ul>
+      </div>
+
+      <!-- Pantry Staples -->
+      <div class="grocery-category">
+        <h4>Pantry Staples</h4>
+        <ul>
+          <li>Olive oil</li>
+          <li>Sesame oil (small bottle)</li>
+          <li>Cooking spray</li>
+          <li>Honey</li>
+          <li>Quinoa (2 cups dry)</li>
+          <li>Rice (1 cup dry + extra for stir-fry)</li>
+          <li>Rolled oats (1 cup)</li>
+          <li>Granola (2 tbsp)</li>
+          <li>Chia seeds (2 tbsp)</li>
+          <li>Tahini (small jar)</li>
+          <li>Salsa (1 jar)</li>
+          <li>Canned diced tomatoes (1 can, 14 oz)</li>
+          <li>Tamari or soy sauce</li>
+          <li>Hoisin sauce (small bottle)</li>
+          <li>Rice vinegar</li>
+          <li>Sriracha</li>
+          <li>Kalamata olives (small jar)</li>
+          <li>Water chestnuts (1 can, 8 oz)</li>
+        </ul>
+      </div>
+
+      <!-- Spices & Seasonings -->
+      <div class="grocery-category">
+        <h4>Spices &amp; Seasonings</h4>
+        <ul>
+          <li>Salt</li>
+          <li>Black pepper</li>
+          <li>Garlic powder</li>
+          <li>Onion powder</li>
+          <li>Paprika</li>
+          <li>Dried thyme</li>
+          <li>Italian seasoning</li>
+          <li>Dried oregano</li>
+          <li>Dried dill</li>
+          <li>Chili powder</li>
+          <li>Cumin</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="doc-footer">
+  <div class="container">
+    <p><strong>Starter Plan</strong> &middot; <span class="terra">All Recipe Diet</span> by Josh Danielson</p>
+    <p style="margin-top: 4px;">For personal use only. Please do not redistribute.</p>
+  </div>
+</footer>
+
+</body>
+</html>

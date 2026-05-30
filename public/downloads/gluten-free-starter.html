@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gluten Free Plan - All Recipe Diet by Josh Danielson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ─── Reset & Base ────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #fbf6ee;
+  --cream-dark: #f3ece0;
+  --terra: #c8623d;
+  --terra-light: #e8956f;
+  --terra-dark: #a84e2e;
+  --brown: #1a140e;
+  --brown-mid: #3d3228;
+  --brown-light: #6b5d4f;
+  --olive: #6e7f3a;
+  --olive-light: #8fa04d;
+  --olive-pale: #eef2e3;
+  --white: #ffffff;
+  --border: #e0d6c8;
+  --shadow: rgba(26, 20, 14, 0.08);
+}
+
+html {
+  font-size: 16px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--cream);
+  color: var(--brown);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Fraunces', Georgia, serif;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Print Button Bar ────────────────────────── */
+.print-bar {
+  background: var(--brown);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.print-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.print-bar p {
+  color: var(--cream);
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--terra);
+  color: var(--white);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-print:hover {
+  background: var(--terra-dark);
+}
+
+.btn-print svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ─── Cover / Header ─────────────────────────── */
+.cover {
+  text-align: center;
+  padding: 64px 0 48px;
+  border-bottom: 2px solid var(--border);
+}
+
+.cover .eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 12px;
+}
+
+.cover h1 {
+  font-size: 2.75rem;
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.cover .subtitle {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.25rem;
+  color: var(--brown-light);
+  margin-bottom: 6px;
+}
+
+.cover .tagline {
+  font-size: 0.9375rem;
+  color: var(--olive);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.cover .author {
+  font-size: 0.9375rem;
+  color: var(--brown-light);
+}
+
+.cover .author strong {
+  color: var(--brown);
+}
+
+.cover .divider {
+  width: 60px;
+  height: 3px;
+  background: var(--olive);
+  margin: 24px auto 0;
+  border-radius: 2px;
+}
+
+.cover .gf-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--olive);
+  color: var(--white);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-top: 20px;
+}
+
+.cover .gf-hero-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Section Headings ────────────────────────── */
+.section-heading {
+  text-align: center;
+  padding: 48px 0 32px;
+}
+
+.section-heading h2 {
+  font-size: 2rem;
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.section-heading p {
+  color: var(--brown-light);
+  font-size: 1rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.section-heading .accent-line {
+  width: 40px;
+  height: 3px;
+  background: var(--terra);
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+/* ─── Meal Plan Table ─────────────────────────── */
+.meal-plan {
+  padding-bottom: 48px;
+  border-bottom: 2px solid var(--border);
+}
+
+.meal-plan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+
+.meal-plan-table thead th {
+  background: var(--brown);
+  color: var(--cream);
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 12px 10px;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+
+.meal-plan-table thead th:first-child {
+  width: 90px;
+}
+
+.meal-plan-table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.meal-plan-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.meal-plan-table tbody tr:nth-child(even) {
+  background: var(--cream);
+}
+
+.meal-plan-table .day-label {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  color: var(--terra);
+  white-space: nowrap;
+}
+
+/* ─── Recipe Cards ────────────────────────────── */
+.recipes-section {
+  padding-bottom: 24px;
+}
+
+.recipe-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px var(--shadow);
+  margin-bottom: 32px;
+  overflow: hidden;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.recipe-header {
+  background: var(--brown);
+  color: var(--cream);
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.recipe-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.recipe-header h3 {
+  font-size: 1.25rem;
+  color: var(--cream);
+}
+
+.gf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--olive);
+  color: var(--white);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.gf-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8125rem;
+  opacity: 0.85;
+}
+
+.recipe-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.recipe-body {
+  padding: 24px 28px;
+}
+
+.recipe-desc {
+  font-size: 0.9375rem;
+  color: var(--brown-light);
+  margin-bottom: 20px;
+  line-height: 1.55;
+  border-left: 3px solid var(--olive-light);
+  padding-left: 14px;
+}
+
+.recipe-columns {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 28px;
+}
+
+.recipe-columns h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--cream-dark);
+}
+
+.recipe-columns ul {
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.recipe-columns ul li {
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.recipe-columns ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  background: var(--olive-light);
+  border-radius: 50%;
+}
+
+.recipe-columns ol {
+  list-style: none;
+  counter-reset: steps;
+  font-size: 0.875rem;
+}
+
+.recipe-columns ol li {
+  counter-increment: steps;
+  padding: 6px 0 6px 32px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.recipe-columns ol li::before {
+  content: counter(steps);
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 22px;
+  height: 22px;
+  background: var(--terra);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Grocery List ────────────────────────────── */
+.grocery-section {
+  padding-bottom: 48px;
+  border-bottom: 2px solid var(--border);
+}
+
+.grocery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.grocery-category {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px var(--shadow);
+  padding: 24px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.grocery-category h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1rem;
+  color: var(--terra);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grocery-category ul {
+  list-style: none;
+  font-size: 0.875rem;
+  columns: 1;
+}
+
+.grocery-category ul li {
+  padding: 5px 0 5px 24px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.grocery-category ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border);
+  border-radius: 3px;
+  background: var(--white);
+}
+
+.grocery-category .gf-note {
+  font-size: 0.75rem;
+  color: var(--olive);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.grocery-category.wide {
+  grid-column: 1 / -1;
+}
+
+.grocery-category.wide ul {
+  columns: 2;
+  column-gap: 32px;
+}
+
+/* ─── GF Guide Section ───────────────────────── */
+.gf-guide-section {
+  padding-bottom: 48px;
+  border-bottom: 2px solid var(--border);
+}
+
+.gf-guide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.gf-guide-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px var(--shadow);
+  padding: 28px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.gf-guide-card.wide {
+  grid-column: 1 / -1;
+}
+
+.gf-guide-card h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.125rem;
+  color: var(--brown);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--olive-pale);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gf-guide-card h4 .icon {
+  width: 24px;
+  height: 24px;
+  background: var(--olive);
+  color: var(--white);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.swap-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.swap-table thead th {
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--olive);
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--cream-dark);
+}
+
+.swap-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--cream-dark);
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.swap-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.swap-table .avoid {
+  color: var(--terra);
+  font-weight: 500;
+}
+
+.swap-table .use {
+  color: var(--olive);
+  font-weight: 600;
+}
+
+.gf-guide-card ul {
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.gf-guide-card ul li {
+  padding: 6px 0 6px 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.gf-guide-card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 8px;
+  height: 8px;
+  background: var(--olive);
+  border-radius: 50%;
+}
+
+.gf-guide-card ul li strong {
+  color: var(--brown);
+}
+
+/* ─── Footer ──────────────────────────────────── */
+.doc-footer {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--brown-light);
+  font-size: 0.875rem;
+}
+
+.doc-footer strong {
+  color: var(--brown);
+}
+
+.doc-footer .terra {
+  color: var(--terra);
+}
+
+/* ─── Responsive ──────────────────────────────── */
+@media (max-width: 700px) {
+  .cover h1 { font-size: 2rem; }
+  .section-heading h2 { font-size: 1.5rem; }
+  .recipe-columns { grid-template-columns: 1fr; gap: 20px; }
+  .grocery-grid { grid-template-columns: 1fr; }
+  .grocery-category.wide ul { columns: 1; }
+  .gf-guide-grid { grid-template-columns: 1fr; }
+  .gf-guide-card.wide { grid-column: auto; }
+  .meal-plan-table { font-size: 0.75rem; }
+  .meal-plan-table thead th,
+  .meal-plan-table tbody td { padding: 8px 6px; }
+  .recipe-header { padding: 16px 20px; }
+  .recipe-body { padding: 20px; }
+}
+
+/* ─── Print Styles ────────────────────────────── */
+@page {
+  size: letter;
+  margin: 0.6in 0.5in;
+}
+
+@media print {
+  html { font-size: 11pt; }
+
+  body {
+    background: white;
+    color: #1a140e;
+  }
+
+  .print-bar { display: none !important; }
+
+  .container { max-width: 100%; padding: 0; }
+
+  .cover { padding: 32px 0 24px; }
+  .cover h1 { font-size: 28pt; }
+
+  .section-heading { padding: 24px 0 16px; }
+
+  .recipe-card {
+    box-shadow: none;
+    border: 1px solid #d6cfc4;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .recipe-header {
+    background: #1a140e !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .gf-badge {
+    background: #6e7f3a !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cover .gf-hero-badge {
+    background: #6e7f3a !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .recipe-columns ol li::before {
+    background: #c8623d !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .meal-plan-table {
+    box-shadow: none;
+    border: 1px solid #d6cfc4;
+  }
+
+  .meal-plan-table thead th {
+    background: #1a140e !important;
+    color: #fbf6ee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .grocery-category {
+    box-shadow: none;
+    border: 1px solid #d6cfc4;
+  }
+
+  .gf-guide-card {
+    box-shadow: none;
+    border: 1px solid #d6cfc4;
+  }
+
+  .grocery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gf-guide-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grocery-section,
+  .gf-guide-section,
+  .meal-plan {
+    border-bottom-color: #d6cfc4;
+  }
+
+  .section-heading,
+  .grocery-category,
+  .gf-guide-card,
+  .meal-plan {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== PRINT BUTTON BAR ====== -->
+<div class="print-bar">
+  <div class="container">
+    <p>Save this page as a PDF using Print &rarr; "Save as PDF"</p>
+    <button class="btn-print" onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / Save as PDF
+    </button>
+  </div>
+</div>
+
+<!-- ====== COVER ====== -->
+<section class="cover">
+  <div class="container">
+    <span class="eyebrow">All Recipe Diet</span>
+    <h1>Gluten Free Plan</h1>
+    <p class="subtitle">14 Celiac-Friendly Recipes &middot; 7-Day Meal Plan &middot; Grocery List</p>
+    <p class="tagline">100% Gluten-Free &middot; All Natural Ingredients</p>
+    <p class="author">Created by <strong>Josh Danielson</strong></p>
+    <div class="divider"></div>
+    <span class="gf-hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Certified Gluten-Free
+    </span>
+  </div>
+</section>
+
+<!-- ====== 7-DAY MEAL PLAN ====== -->
+<div class="section-heading">
+  <div class="container">
+    <h2>7-Day Meal Plan</h2>
+    <p>A flexible week of 100% gluten-free meals using the 14 recipes below. Mix and match as you like.</p>
+    <div class="accent-line"></div>
+  </div>
+</div>
+
+<section class="meal-plan">
+  <div class="container">
+    <table class="meal-plan-table">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Breakfast</th>
+          <th>Lunch</th>
+          <th>Dinner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="day-label">Monday</td>
+          <td>Egg &amp; Veggie Breakfast Hash</td>
+          <td>Greek Chicken &amp; Quinoa Salad</td>
+          <td>Herb-Crusted Salmon &amp; Sweet Potato</td>
+        </tr>
+        <tr>
+          <td class="day-label">Tuesday</td>
+          <td>Egg &amp; Veggie Breakfast Hash</td>
+          <td>Chicken Avocado Rice Bowl</td>
+          <td>Turkey &amp; Zucchini Meatballs</td>
+        </tr>
+        <tr>
+          <td class="day-label">Wednesday</td>
+          <td>Egg &amp; Veggie Breakfast Hash</td>
+          <td>Shrimp Cauliflower Fried Rice</td>
+          <td>Lemon Garlic Chicken &amp; Green Beans</td>
+        </tr>
+        <tr>
+          <td class="day-label">Thursday</td>
+          <td>Egg &amp; Veggie Breakfast Hash</td>
+          <td>Greek Chicken &amp; Quinoa Salad</td>
+          <td>Beef &amp; Bell Pepper Skillet</td>
+        </tr>
+        <tr>
+          <td class="day-label">Friday</td>
+          <td>Egg &amp; Veggie Breakfast Hash</td>
+          <td>Sesame Ginger Salmon Bowl</td>
+          <td>Coconut Curry Chicken</td>
+        </tr>
+        <tr>
+          <td class="day-label">Saturday</td>
+          <td>Egg &amp; Veggie Breakfast Hash</td>
+          <td>Grilled Chicken with Mango Salsa</td>
+          <td>Baked Cod with Tomato &amp; Olive Relish</td>
+        </tr>
+        <tr>
+          <td class="day-label">Sunday</td>
+          <td>Egg &amp; Veggie Breakfast Hash</td>
+          <td>Stuffed Bell Peppers with Ground Turkey</td>
+          <td>Pork Tenderloin &amp; Roasted Vegetables</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== RECIPES ====== -->
+<div class="section-heading">
+  <div class="container">
+    <h2>The Recipes</h2>
+    <p>14 simple, 100% gluten-free recipes designed for celiac-friendly eating. Real food with real flavor -- no compromises.</p>
+    <div class="accent-line"></div>
+  </div>
+</div>
+
+<section class="recipes-section">
+  <div class="container">
+
+    <!-- ── Recipe 1 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>1. Herb-Crusted Salmon &amp; Sweet Potato</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>25 min</span>
+          <span>540 cal</span>
+          <span>38g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Oven-baked salmon with a golden Dijon-herb crust, roasted sweet potato rounds, and a bed of wilted spinach. A nutrient-dense dinner that comes together on one sheet pan.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 salmon fillets (6 oz each)</li>
+              <li>2 medium sweet potatoes, sliced into rounds</li>
+              <li>2 cups fresh spinach</li>
+              <li>1 tbsp Dijon mustard (GF-certified)</li>
+              <li>Fresh dill, chopped</li>
+              <li>Fresh parsley, chopped</li>
+              <li>1 tbsp olive oil</li>
+              <li>Salt and pepper, to taste</li>
+              <li>Garlic powder</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 425&deg;F. Slice sweet potatoes into 1/4-inch rounds, toss with olive oil, salt, pepper, and garlic powder. Spread on a sheet pan and roast for 20 minutes.</li>
+              <li>While potatoes roast, brush salmon fillets with Dijon mustard and press chopped dill and parsley onto the top to form an herb crust. Season with salt and pepper.</li>
+              <li>After 20 minutes, push sweet potatoes to one side. Place salmon on the sheet pan and return to oven for 12 minutes until salmon flakes easily with a fork.</li>
+              <li>Heat a small pan over medium heat. Add spinach and wilt for 1-2 minutes, seasoning with a pinch of salt. Plate salmon over spinach alongside sweet potato rounds.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 2 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>2. Grilled Chicken with Mango Salsa</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>480 cal</span>
+          <span>36g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Juicy grilled chicken topped with a bright, fresh mango-jalapeno salsa, served over fluffy cilantro-lime rice. Naturally gluten-free and bursting with tropical flavor.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 chicken breasts</li>
+              <li>1 ripe mango, diced</li>
+              <li>1/2 jalapeno, seeded and minced</li>
+              <li>2 tbsp red onion, finely diced</li>
+              <li>Fresh cilantro, chopped</li>
+              <li>2 limes</li>
+              <li>1 cup white rice</li>
+              <li>Salt, to taste</li>
+              <li>1 tsp cumin</li>
+              <li>1 tbsp olive oil</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Cook rice according to package directions. When done, fluff with a fork and stir in the juice of 1 lime and a handful of chopped cilantro. Cover and set aside.</li>
+              <li>Season chicken breasts with cumin, salt, and a drizzle of olive oil. Grill or pan-sear over medium-high heat for 5-6 minutes per side until cooked through (internal temp 165&deg;F). Let rest 5 minutes, then slice.</li>
+              <li>While chicken rests, make the salsa: combine diced mango, minced jalapeno, red onion, cilantro, and the juice of 1 lime. Toss gently and season with a pinch of salt.</li>
+              <li>Serve sliced chicken over cilantro-lime rice, topped generously with mango salsa.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 3 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>3. Turkey &amp; Zucchini Meatballs</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>25 min</span>
+          <span>390 cal</span>
+          <span>34g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Tender baked meatballs made with ground turkey and shredded zucchini -- no breadcrumbs needed. Almond flour keeps them perfectly bound and 100% gluten-free.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb ground turkey</li>
+              <li>1 zucchini, shredded and squeezed dry</li>
+              <li>1 egg</li>
+              <li>2 tbsp almond flour</li>
+              <li>2 cloves garlic, minced</li>
+              <li>1 tsp Italian seasoning</li>
+              <li>Salt and pepper, to taste</li>
+              <li>GF marinara sauce, for serving</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 400&deg;F. Line a baking sheet with parchment paper.</li>
+              <li>Shred the zucchini using a box grater, then squeeze out as much moisture as possible using a clean towel or cheesecloth.</li>
+              <li>In a large bowl, combine ground turkey, squeezed zucchini, egg, almond flour, minced garlic, Italian seasoning, salt, and pepper. Mix until just combined -- don't overmix.</li>
+              <li>Roll the mixture into 16 even meatballs (about 1.5 inches each). Place on the prepared baking sheet and bake for 18-20 minutes until golden and cooked through. Serve with warm GF marinara sauce.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 4 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>4. Shrimp Cauliflower Fried Rice</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>15 min</span>
+          <span>350 cal</span>
+          <span>32g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A low-carb stir-fry that tastes like the real thing. Cauliflower rice, plump shrimp, scrambled eggs, and crisp veggies tossed in tamari -- naturally gluten-free and ready in 15 minutes.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb shrimp, peeled and deveined</li>
+              <li>4 cups riced cauliflower</li>
+              <li>2 eggs</li>
+              <li>1 cup peas and carrots (fresh or frozen)</li>
+              <li>3 green onions, sliced</li>
+              <li>2 tbsp tamari (GF soy sauce)</li>
+              <li>1 tbsp sesame oil</li>
+              <li>2 cloves garlic, minced</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat sesame oil in a large skillet or wok over medium-high heat. Add shrimp and cook 2-3 minutes per side until pink and opaque. Remove and set aside.</li>
+              <li>In the same pan, scramble the eggs, breaking them into small pieces. Push to one side of the pan.</li>
+              <li>Add riced cauliflower, peas and carrots, and minced garlic. Stir-fry for 3-4 minutes until cauliflower is tender but not mushy.</li>
+              <li>Return shrimp to the pan. Pour tamari over everything and toss to combine. Top with sliced green onions and serve immediately.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 5 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>5. Lemon Garlic Chicken &amp; Green Beans</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>420 cal</span>
+          <span>35g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">One-pan chicken thighs with crispy golden skin, tender green beans, and a bright lemon-garlic finish. Simple, satisfying, and naturally gluten-free.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>4 bone-in chicken thighs</li>
+              <li>3 cups green beans, trimmed</li>
+              <li>4 garlic cloves, smashed</li>
+              <li>1 lemon (juice + slices)</li>
+              <li>1 tbsp olive oil</li>
+              <li>Salt and pepper, to taste</li>
+              <li>1 tsp dried oregano</li>
+              <li>Pinch of red pepper flakes</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 400&deg;F. Pat chicken thighs dry and season generously with salt, pepper, and oregano on both sides.</li>
+              <li>Heat olive oil in an oven-safe skillet over medium-high heat. Place chicken skin-side down and sear for 6 minutes without moving, until the skin is deeply golden and crispy.</li>
+              <li>Flip the thighs. Add green beans, smashed garlic cloves, lemon slices, and red pepper flakes around the chicken.</li>
+              <li>Transfer the skillet to the oven and cook for 12 minutes until chicken reaches 165&deg;F and green beans are tender. Squeeze fresh lemon juice over everything before serving.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 6 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>6. Beef &amp; Bell Pepper Skillet</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>15 min</span>
+          <span>460 cal</span>
+          <span>36g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Quick-seared beef strips with colorful bell peppers in a savory tamari-ginger sauce. Served over steamed rice for a satisfying weeknight dinner.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb flank steak, sliced thin against the grain</li>
+              <li>3 bell peppers (mixed colors), sliced</li>
+              <li>2 tbsp tamari (GF soy sauce)</li>
+              <li>1 tbsp rice vinegar</li>
+              <li>1 tsp fresh ginger, grated</li>
+              <li>1 tbsp olive oil</li>
+              <li>2 cloves garlic, minced</li>
+              <li>Cooked rice, for serving</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat olive oil in a large skillet over high heat until smoking. Add sliced steak in a single layer and sear for 2-3 minutes until browned. Remove and set aside.</li>
+              <li>In the same skillet, add sliced bell peppers. Stir-fry for 3-4 minutes until slightly softened but still crisp.</li>
+              <li>Whisk together tamari, rice vinegar, grated ginger, and minced garlic in a small bowl.</li>
+              <li>Return beef to the skillet, pour the sauce over everything, and toss to combine. Cook 1 minute more until heated through. Serve immediately over steamed rice.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 7 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>7. Baked Cod with Tomato &amp; Olive Relish</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>25 min</span>
+          <span>320 cal</span>
+          <span>30g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Flaky Mediterranean baked cod topped with a vibrant cherry tomato, olive, and caper relish. Light, bright, and effortlessly elegant.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 cod fillets (6 oz each)</li>
+              <li>1 cup cherry tomatoes, halved</li>
+              <li>1/4 cup kalamata olives, halved</li>
+              <li>1 tbsp capers, drained</li>
+              <li>Fresh basil, torn</li>
+              <li>1 tbsp olive oil</li>
+              <li>1 lemon (juice + wedges)</li>
+              <li>Salt and pepper, to taste</li>
+              <li>2 cloves garlic, minced</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 400&deg;F. Place cod fillets in a lightly oiled baking dish. Season with salt, pepper, minced garlic, and a squeeze of lemon juice.</li>
+              <li>In a small bowl, combine halved cherry tomatoes, kalamata olives, capers, a drizzle of olive oil, and a squeeze of lemon. Toss gently.</li>
+              <li>Spoon the tomato-olive relish over and around the cod fillets.</li>
+              <li>Bake for 15-18 minutes until cod is opaque and flakes easily with a fork. Garnish with torn fresh basil and serve with lemon wedges.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 8 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>8. Chicken Avocado Rice Bowl</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>490 cal</span>
+          <span>36g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Seasoned chicken with creamy avocado, warm black beans, and cilantro-lime rice. A filling, naturally gluten-free bowl that is endlessly customizable.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 chicken breasts</li>
+              <li>1 avocado, sliced</li>
+              <li>1 can (15 oz) black beans, drained and rinsed</li>
+              <li>1 cup white rice</li>
+              <li>Fresh cilantro, chopped</li>
+              <li>2 limes</li>
+              <li>1 tsp cumin</li>
+              <li>Salt and pepper, to taste</li>
+              <li>1 tbsp olive oil</li>
+              <li>Hot sauce (optional)</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Cook rice according to package directions. When done, fluff and stir in the juice of 1 lime and a handful of chopped cilantro.</li>
+              <li>Season chicken breasts with cumin, salt, and pepper. Heat olive oil in a skillet over medium-high heat and cook chicken for 5-6 minutes per side until golden and cooked through. Let rest, then slice.</li>
+              <li>Warm black beans in a small saucepan or microwave. Season with a pinch of cumin and salt.</li>
+              <li>Build bowls: divide cilantro-lime rice among bowls, top with sliced chicken, black beans, and avocado. Squeeze remaining lime over everything and add hot sauce to taste.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 9 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>9. Stuffed Bell Peppers with Ground Turkey</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>30 min</span>
+          <span>420 cal</span>
+          <span>32g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Colorful bell peppers stuffed with seasoned ground turkey, rice, diced tomatoes, and melted cheese. A hearty, family-friendly dinner that is naturally gluten-free.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>4 bell peppers, tops cut off and seeded</li>
+              <li>1 lb ground turkey</li>
+              <li>1 cup cooked rice</li>
+              <li>1 can (14 oz) diced tomatoes</li>
+              <li>1/2 cup shredded cheese</li>
+              <li>2 cloves garlic, minced</li>
+              <li>1 tsp cumin</li>
+              <li>1 tsp chili powder</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 375&deg;F. Place hollowed bell peppers upright in a baking dish.</li>
+              <li>Brown ground turkey in a skillet over medium-high heat, breaking into crumbles. Add minced garlic, cumin, chili powder, salt, and pepper. Cook 1 minute until fragrant.</li>
+              <li>Stir in cooked rice and diced tomatoes (with juices). Simmer for 2-3 minutes until combined. Spoon the filling into each bell pepper, packing gently.</li>
+              <li>Top each pepper with shredded cheese. Cover baking dish with foil and bake for 20 minutes. Remove foil for the last 5 minutes to let cheese brown and bubble.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 10 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>10. Sesame Ginger Salmon Bowl</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>530 cal</span>
+          <span>38g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Pan-seared salmon glazed with a sweet and savory sesame-ginger sauce, served in a bowl with rice, edamame, and cool cucumber. An Asian-inspired favorite.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 salmon fillets (6 oz each)</li>
+              <li>1 cup edamame, shelled</li>
+              <li>1 cucumber, sliced</li>
+              <li>2 tbsp tamari (GF soy sauce)</li>
+              <li>1 tbsp honey</li>
+              <li>1 tsp sesame oil</li>
+              <li>1 tsp fresh ginger, grated</li>
+              <li>Cooked rice, for serving</li>
+              <li>Sesame seeds, for garnish</li>
+              <li>1 green onion, sliced</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Whisk together tamari, honey, sesame oil, and grated ginger in a small bowl to make the glaze.</li>
+              <li>Heat a skillet over medium-high heat. Season salmon with salt and pepper, then sear skin-side down for 4 minutes. Flip and cook 3 more minutes.</li>
+              <li>Pour the glaze over the salmon in the last minute of cooking, spooning it over the fillets to coat. Remove from heat.</li>
+              <li>Build bowls: divide cooked rice among bowls, add edamame, sliced cucumber, and glazed salmon. Drizzle any remaining sauce from the pan over the top. Garnish with sesame seeds and sliced green onion.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 11 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>11. Greek Chicken &amp; Quinoa Salad</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>15 min</span>
+          <span>470 cal</span>
+          <span>36g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A vibrant Mediterranean salad bowl with grilled chicken, fluffy quinoa, crisp vegetables, briny olives, and a bright lemon-oregano dressing.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 chicken breasts</li>
+              <li>1 cup quinoa, cooked</li>
+              <li>1 cucumber, diced</li>
+              <li>1 cup cherry tomatoes, halved</li>
+              <li>1/4 cup kalamata olives, halved</li>
+              <li>2 tbsp red onion, thinly sliced</li>
+              <li>1/4 cup crumbled feta cheese</li>
+              <li>2 tbsp lemon juice</li>
+              <li>1 tbsp olive oil</li>
+              <li>1 tsp dried oregano</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Season chicken breasts with salt, pepper, and half the oregano. Grill or pan-sear over medium-high heat for 5-6 minutes per side until cooked through. Let rest, then slice.</li>
+              <li>In a large bowl, combine cooked quinoa, diced cucumber, halved cherry tomatoes, kalamata olives, and sliced red onion. Toss gently.</li>
+              <li>Whisk together lemon juice, olive oil, remaining oregano, salt, and pepper to make the dressing.</li>
+              <li>Divide the quinoa salad among bowls, top with sliced chicken and crumbled feta. Drizzle with lemon-oregano dressing and serve.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 12 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>12. Pork Tenderloin &amp; Roasted Vegetables</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>30 min</span>
+          <span>440 cal</span>
+          <span>34g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Herb-rubbed pork tenderloin roasted alongside Brussels sprouts, carrots, and red onion on one sheet pan. Hearty, hands-off, and completely gluten-free.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb pork tenderloin</li>
+              <li>2 cups Brussels sprouts, halved</li>
+              <li>3 carrots, peeled and cut into chunks</li>
+              <li>1 red onion, cut into wedges</li>
+              <li>2 tbsp olive oil</li>
+              <li>Fresh rosemary, chopped</li>
+              <li>Fresh thyme leaves</li>
+              <li>1 tsp garlic powder</li>
+              <li>Salt and pepper, to taste</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Preheat oven to 425&deg;F. Pat pork tenderloin dry. Rub with 1 tbsp olive oil, rosemary, thyme, garlic powder, salt, and pepper.</li>
+              <li>Toss Brussels sprouts, carrots, and red onion with remaining olive oil, salt, and pepper. Spread on a sheet pan in a single layer.</li>
+              <li>Place the pork tenderloin in the center of the vegetables. Roast for 22-25 minutes until pork reaches 145&deg;F and vegetables are golden and tender.</li>
+              <li>Remove from oven and let the pork rest for 5 minutes before slicing into medallions. Serve alongside the roasted vegetables.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 13 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>13. Coconut Curry Chicken</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>25 min</span>
+          <span>480 cal</span>
+          <span>35g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">Creamy coconut curry loaded with tender chicken, spinach, and bell pepper. Rich, warming, and naturally gluten-free -- make sure your curry paste is GF-certified.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>1 lb chicken breast, cubed</li>
+              <li>1 can (14 oz) coconut milk</li>
+              <li>2 cups fresh spinach</li>
+              <li>1 bell pepper, sliced</li>
+              <li>2 tbsp GF curry paste</li>
+              <li>2 cloves garlic, minced</li>
+              <li>1 tsp fresh ginger, grated</li>
+              <li>Cooked rice, for serving</li>
+              <li>Fresh cilantro and lime, for garnish</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat a drizzle of oil in a large skillet over medium-high heat. Add cubed chicken and sear for 3-4 minutes until golden on all sides. Remove and set aside.</li>
+              <li>In the same pan, add minced garlic and grated ginger. Cook for 30 seconds until fragrant. Add GF curry paste and stir for 1 minute to bloom the spices.</li>
+              <li>Pour in coconut milk and stir to combine. Return chicken to the pan along with sliced bell pepper. Simmer for 8-10 minutes until chicken is cooked through and sauce has thickened slightly.</li>
+              <li>Stir in spinach and cook for 1-2 minutes until wilted. Serve over steamed rice, garnished with fresh cilantro and a squeeze of lime.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Recipe 14 ── -->
+    <article class="recipe-card">
+      <div class="recipe-header">
+        <div class="recipe-title-group">
+          <h3>14. Egg &amp; Veggie Breakfast Hash</h3>
+          <span class="gf-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            GF
+          </span>
+        </div>
+        <div class="recipe-meta">
+          <span>20 min</span>
+          <span>380 cal</span>
+          <span>24g protein</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <p class="recipe-desc">A hearty morning skillet with crispy sweet potato, colorful peppers and onion, topped with perfectly baked eggs. No bread needed -- this breakfast is all about the hash.</p>
+        <div class="recipe-columns">
+          <div>
+            <h4>Ingredients</h4>
+            <ul>
+              <li>2 sweet potatoes, peeled and diced small</li>
+              <li>1 bell pepper, diced</li>
+              <li>1/2 onion, diced</li>
+              <li>4 eggs</li>
+              <li>1 tbsp olive oil</li>
+              <li>1 tsp smoked paprika</li>
+              <li>Salt and pepper, to taste</li>
+              <li>Fresh chives, for garnish</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Instructions</h4>
+            <ol>
+              <li>Heat olive oil in a large oven-safe skillet over medium heat. Add diced sweet potatoes and cook for 8 minutes, stirring occasionally, until golden and nearly tender.</li>
+              <li>Add diced bell pepper and onion. Cook for 3 more minutes until softened. Season with smoked paprika, salt, and pepper.</li>
+              <li>Make 4 small wells in the hash. Crack an egg into each well. Cover the skillet with a lid (or foil) and cook for 4-5 minutes until egg whites are set but yolks are still slightly runny.</li>
+              <li>Remove from heat, garnish with fresh chives, and serve directly from the skillet.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ====== GROCERY LIST ====== -->
+<div class="section-heading">
+  <div class="container">
+    <h2>Master Grocery List</h2>
+    <p>Everything you need for all 14 gluten-free recipes, organized by category. Check off items as you shop.</p>
+    <div class="accent-line"></div>
+  </div>
+</div>
+
+<section class="grocery-section">
+  <div class="container">
+    <div class="grocery-grid">
+
+      <!-- Proteins -->
+      <div class="grocery-category">
+        <h4>Proteins</h4>
+        <ul>
+          <li>Chicken breasts (about 4 lbs total)</li>
+          <li>Bone-in chicken thighs (4)</li>
+          <li>Ground turkey (2 lbs)</li>
+          <li>Salmon fillets (4, about 6 oz each)</li>
+          <li>Cod fillets (2, about 6 oz each)</li>
+          <li>Shrimp, peeled &amp; deveined (1 lb)</li>
+          <li>Flank steak (1 lb)</li>
+          <li>Pork tenderloin (1 lb)</li>
+        </ul>
+      </div>
+
+      <!-- Dairy & Eggs -->
+      <div class="grocery-category">
+        <h4>Dairy &amp; Eggs</h4>
+        <ul>
+          <li>Eggs (1 dozen)</li>
+          <li>Crumbled feta cheese (1/4 cup)</li>
+          <li>Shredded cheese (1/2 cup)</li>
+        </ul>
+      </div>
+
+      <!-- Produce -->
+      <div class="grocery-category wide">
+        <h4>Produce</h4>
+        <ul>
+          <li>Sweet potatoes (4 medium)</li>
+          <li>Bell peppers (10, mixed colors)</li>
+          <li>Fresh spinach (4 cups)</li>
+          <li>Green beans (3 cups)</li>
+          <li>Brussels sprouts (2 cups)</li>
+          <li>Carrots (3 large)</li>
+          <li>Zucchini (1 large)</li>
+          <li>Cucumber (2)</li>
+          <li>Cherry tomatoes (2 cups)</li>
+          <li>Riced cauliflower (4 cups)</li>
+          <li>Edamame, shelled (1 cup)</li>
+          <li>Peas &amp; carrots, frozen (1 cup)</li>
+          <li>Red onion (2)</li>
+          <li>Yellow onion (1)</li>
+          <li>Green onions (1 bunch)</li>
+          <li>Fresh garlic (2 heads)</li>
+          <li>Fresh ginger (1 piece)</li>
+          <li>Jalapeno (1)</li>
+          <li>Ripe mango (1)</li>
+          <li>Avocados (2)</li>
+          <li>Lemons (5)</li>
+          <li>Limes (4)</li>
+          <li>Fresh dill (1 small bunch)</li>
+          <li>Fresh parsley (1 bunch)</li>
+          <li>Fresh cilantro (1 bunch)</li>
+          <li>Fresh basil (1 small bunch)</li>
+          <li>Fresh rosemary (1 sprig)</li>
+          <li>Fresh thyme (1 small bunch)</li>
+          <li>Fresh chives (1 small bunch)</li>
+        </ul>
+      </div>
+
+      <!-- Pantry Staples -->
+      <div class="grocery-category">
+        <h4>Pantry Staples <span class="gf-note">(verify GF labels)</span></h4>
+        <ul>
+          <li>Olive oil</li>
+          <li>Sesame oil (small bottle)</li>
+          <li>White rice (3+ cups dry)</li>
+          <li>Quinoa (1 cup dry)</li>
+          <li>Almond flour (small bag)</li>
+          <li>Tamari -- GF soy sauce (1 bottle)</li>
+          <li>Dijon mustard (GF-certified)</li>
+          <li>GF curry paste (1 small jar)</li>
+          <li>GF marinara sauce (1 jar)</li>
+          <li>Coconut milk (1 can, 14 oz)</li>
+          <li>Canned black beans (1 can, 15 oz)</li>
+          <li>Canned diced tomatoes (2 cans, 14 oz)</li>
+          <li>Kalamata olives (1 small jar)</li>
+          <li>Capers (1 small jar)</li>
+          <li>Rice vinegar</li>
+          <li>Honey</li>
+          <li>Hot sauce (optional)</li>
+          <li>Sesame seeds</li>
+        </ul>
+      </div>
+
+      <!-- Spices & Seasonings -->
+      <div class="grocery-category">
+        <h4>Spices &amp; Seasonings</h4>
+        <ul>
+          <li>Salt</li>
+          <li>Black pepper</li>
+          <li>Garlic powder</li>
+          <li>Cumin</li>
+          <li>Chili powder</li>
+          <li>Smoked paprika</li>
+          <li>Dried oregano</li>
+          <li>Italian seasoning</li>
+          <li>Red pepper flakes</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====== GF INGREDIENT GUIDE ====== -->
+<div class="section-heading">
+  <div class="container">
+    <h2>Gluten-Free Ingredient Guide</h2>
+    <p>Essential swaps, label-reading tips, and cross-contamination awareness for confident GF cooking.</p>
+    <div class="accent-line"></div>
+  </div>
+</div>
+
+<section class="gf-guide-section">
+  <div class="container">
+    <div class="gf-guide-grid">
+
+      <!-- Common GF Swaps -->
+      <div class="gf-guide-card wide">
+        <h4>
+          <span class="icon">1</span>
+          Common Gluten-Free Swaps
+        </h4>
+        <table class="swap-table">
+          <thead>
+            <tr>
+              <th>Instead Of</th>
+              <th>Use This (GF)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="avoid">Soy sauce</td>
+              <td class="use">Tamari (GF-labeled)</td>
+              <td>Traditional soy sauce contains wheat. Tamari is naturally brewed without wheat -- always check the label says "gluten-free."</td>
+            </tr>
+            <tr>
+              <td class="avoid">Breadcrumbs</td>
+              <td class="use">Almond flour or GF breadcrumbs</td>
+              <td>Almond flour adds protein and healthy fats. Works perfectly as a binder in meatballs, coatings, and crusts.</td>
+            </tr>
+            <tr>
+              <td class="avoid">Pasta (wheat)</td>
+              <td class="use">Rice, quinoa, or GF pasta</td>
+              <td>Rice and quinoa are naturally GF whole grains. If using GF pasta, look for rice-based or chickpea-based varieties.</td>
+            </tr>
+            <tr>
+              <td class="avoid">Flour (all-purpose)</td>
+              <td class="use">Almond flour, rice flour, or GF blend</td>
+              <td>For thickening sauces, use cornstarch or arrowroot. For baking, a 1:1 GF flour blend works best.</td>
+            </tr>
+            <tr>
+              <td class="avoid">Regular mustard</td>
+              <td class="use">GF-certified Dijon mustard</td>
+              <td>Some mustards contain wheat flour or malt vinegar. Look for "Certified Gluten-Free" on the label.</td>
+            </tr>
+            <tr>
+              <td class="avoid">Hoisin / teriyaki sauce</td>
+              <td class="use">GF tamari + honey glaze</td>
+              <td>Most commercial hoisin and teriyaki sauces contain wheat. A simple tamari-honey-ginger combo is a safe and delicious alternative.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Label Reading Tips -->
+      <div class="gf-guide-card">
+        <h4>
+          <span class="icon">2</span>
+          Label Reading Tips
+        </h4>
+        <ul>
+          <li><strong>Look for "Certified Gluten-Free"</strong> -- this means the product has been tested to contain less than 20 ppm of gluten, the FDA threshold.</li>
+          <li><strong>Read the allergen statement</strong> -- FDA requires wheat to be declared. However, barley and rye may not always be listed separately.</li>
+          <li><strong>Watch for hidden gluten</strong> -- malt extract, malt vinegar, brewer's yeast, modified food starch (unless specified as corn), and hydrolyzed wheat protein all contain gluten.</li>
+          <li><strong>Check spice blends and seasonings</strong> -- some contain wheat flour as an anti-caking agent. Buy pure, single-ingredient spices when possible.</li>
+          <li><strong>"Wheat-free" does not mean "gluten-free"</strong> -- products may still contain barley or rye. Always look for the specific GF certification.</li>
+        </ul>
+      </div>
+
+      <!-- Cross-Contamination -->
+      <div class="gf-guide-card">
+        <h4>
+          <span class="icon">3</span>
+          Cross-Contamination Notes
+        </h4>
+        <ul>
+          <li><strong>Dedicated cutting boards and utensils</strong> -- use separate tools for GF cooking to prevent trace contamination from wheat residue.</li>
+          <li><strong>Clean surfaces thoroughly</strong> -- wipe down countertops, cutting boards, and cookware before preparing GF meals, especially in shared kitchens.</li>
+          <li><strong>Separate cooking oils and water</strong> -- never reuse oil or water that has been used to fry or boil gluten-containing foods.</li>
+          <li><strong>Toasters and colanders</strong> -- these are common sources of cross-contamination. Use dedicated GF-only versions or clean them meticulously.</li>
+          <li><strong>Bulk bins at the grocery store</strong> -- scoops and bins may be shared between GF and gluten-containing products. Buy pre-packaged GF items instead.</li>
+          <li><strong>Dining out</strong> -- always communicate your needs clearly. Ask about shared fryers, cooking surfaces, and ingredient sourcing.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="doc-footer">
+  <div class="container">
+    <p><strong>Gluten Free Plan</strong> &middot; <span class="terra">All Recipe Diet</span> by Josh Danielson</p>
+    <p style="margin-top: 4px;">For personal use only. Please do not redistribute.</p>
+  </div>
+</footer>
+
+</body>
+</html>
