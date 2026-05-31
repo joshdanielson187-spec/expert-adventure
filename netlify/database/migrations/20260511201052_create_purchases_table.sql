@@ -1,4 +1,4 @@
-      CREATE TABLE IF NOT EXISTS purchases (
+CREATE TABLE IF NOT EXISTS purchases (
   id SERIAL PRIMARY KEY,
   email TEXT NOT NULL,
   stripe_session_id TEXT,
