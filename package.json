@@ -2,6 +2,9 @@
   "name": "all-recipe-diet",
   "private": true,
   "type": "module",
+  "scripts": {
+  "build": "echo No build needed"
+},
   "dependencies": {
     "@netlify/database": "^0.7.0",
     "@netlify/functions": "^3.0.0",
