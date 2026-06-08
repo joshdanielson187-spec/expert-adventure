@@ -419,13 +419,18 @@ h3, h4 {
   align-items: stretch;
 }
 @media (min-width: 760px) {
-  .packages { grid-template-columns: 1fr 1fr; }
+  .packages { grid-template-columns: 1fr 1fr 1fr; }
 }
 @media (min-width: 1100px) {
   .packages { grid-template-columns: 1fr 1fr 1fr; }
 }
 .pkg { display: flex; flex-direction: column; position: relative; padding: 32px; }
 .pkg-starter:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.pkg-glutenfree {
+  background: linear-gradient(165deg, var(--surface), color-mix(in oklab, var(--olive) 8%, var(--surface)));
+  border-color: color-mix(in oklab, var(--accent) 30%, var(--border));
+}
+.pkg-glutenfree:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .pkg-gluten {
   background: linear-gradient(165deg, var(--surface), color-mix(in oklab, var(--sage) 10%, var(--surface)));
   border-color: color-mix(in oklab, var(--olive) 25%, var(--border));
@@ -498,6 +503,7 @@ h3, h4 {
 }
 [data-theme="dark"] .check { color: var(--accent); }
 
+
 .pkg-foot {
   font-size: .82rem;
   color: var(--text-muted);
@@ -554,6 +560,10 @@ h3, h4 {
   backdrop-filter: blur(4px);
 }
 .badge-tag-premium { background: var(--primary); color: #fff7ec; }
+.badge-tag-gf { background: var(--accent); color: #fff; }
+.tease-pill-gf { color: var(--accent) !important; border-color: color-mix(in oklab, var(--accent) 30%, var(--border)) !important; }
+.gf-library-intro { max-width: 780px; margin-bottom: 24px; }
+.gf-library-intro p { color: var(--text-muted); margin: 0; max-width: 70ch; }
 
 .recipe-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .recipe-title { font-size: 1.18rem; line-height: 1.25; margin-bottom: 2px; }
