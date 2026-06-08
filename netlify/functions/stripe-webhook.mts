@@ -26,7 +26,7 @@ function getPackage(
     if (plinkGlutenFree && paymentLinkId === plinkGlutenFree) {
       return {
         name: "Gluten Free Plan",
-        path: "/downloads/gluten-free-starter.html",
+        path: "/downloads/gluten-free-package-a6c91d2f.html",      
       };
     }
   }
@@ -35,7 +35,7 @@ function getPackage(
     return { name: "Premium Plan", path: "/downloads/premium-plan.html" };
   }
   if (amountCents === 1900) {
-    return { name: "Starter Plan", path: "/downloads/starter-plan.html" };
+    return { name: "Gluten Free Plan", path: "/downloads/gluten-free-package-a6c91d2f.html" };
   }
 
   return null;
