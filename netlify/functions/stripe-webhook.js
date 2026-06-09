@@ -369,11 +369,16 @@ exports.handler = async (event) => {
 
   try {
     // Process all actions in parallel: delivery, email, and bank payout
-    const [deliveryResult, emailResult, payoutResult] = await Promise.all([
-      notifyDeliveryAutomation(deliveryPayload),
-      sendRecipeEmail(deliveryPayload),
-      processBankPayout(session, packageInfo),
-    ]);
+    const [deliveryResult, emailResult] = await Promise.all([
+  notifyDeliveryAutomation(deliveryPayload),
+  sendRecipeEmail(deliveryPayload),
+]);
+
+const payoutResult = {
+  configured: false,
+  processed: false,
+  reason: "automatic_stripe_payouts"
+};
 
     console.log("Stripe checkout completed", {
       ...deliveryPayload,
