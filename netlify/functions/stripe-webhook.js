@@ -252,7 +252,7 @@ function buildRecipeEmailText(payload) {
 
 async function sendRecipeEmail(payload) {
   const resendApiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.FROM_EMAIL || "All Recipe Diet <onboarding@resend.dev>";
+  const fromEmail = process.env.FROM_EMAIL || "All Recipe Diet <noreply@all-recipe-diet.org>";
   const replyToEmail = process.env.REPLY_TO_EMAIL || "";
 
   if (!resendApiKey) {
