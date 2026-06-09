@@ -1,1 +1,1 @@
-http://all-recipe-diet.org/.netlify/functions/resend-webhook
+https://all-recipe-diet.org/.netlify/functions/resend-webhook
