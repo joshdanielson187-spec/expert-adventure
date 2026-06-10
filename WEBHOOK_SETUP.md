@@ -5,7 +5,7 @@ This site includes a Netlify Function backend that receives Stripe events and em
 ## Endpoint
 
 ```
-https://all-recipe-diet.org/api/stripe-webhook
+https://all-recipe-diet.org/.netlify/functions/stripe-webhook
 ```
 
 Netlify rewrites that path to the underlying function at `/.netlify/functions/stripe-webhook` (see `netlify.toml`).
