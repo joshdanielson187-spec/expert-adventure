@@ -58,7 +58,7 @@ In the Stripe Dashboard, go to **Developers → Webhooks → Add endpoint**.
 Endpoint URL:
 
 ```text
-https://all-recipe-diet.org/api/stripe-webhook
+https://all-recipe-diet.org/.netlify/functions/stripe-webhook
 ```
 
 Event to send:
