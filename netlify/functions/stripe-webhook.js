@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const { getDatabase } = require("@netlify/database");
 
 const STARTER_PAYMENT_LINK_ID = "plink_1TTmthHHJHOb4J4jVWRDRXQY";
 const PREMIUM_PAYMENT_LINK_ID = "plink_1TTmthHHJHOb4J4jRLkHKP3J";
@@ -8,9 +9,6 @@ const SITE_URL = (process.env.SITE_URL || "https://all-recipe-diet.org").replace
 const STARTER_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/starter-package-9f4d2a7c.html`;
 const PREMIUM_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/premium-package-c8e7b3a1.html`;
 const GLUTEN_FREE_DEFAULT_DELIVERY_URL = `${SITE_URL}/downloads/gluten-free-package-a6c91d2f.html`;
-
-// Payout configuration - takes a percentage fee before sending to your bank
-const PAYOUT_PERCENTAGE = 0.95; // Send 95%, keep 5% for fees/costs
 
 function timingSafeEqual(a, b) {
   const aBuffer = Buffer.from(a);
@@ -76,14 +74,11 @@ function getPackageFromSession(session) {
     };
   }
 
-  if (session.amount_total === 1900) {
-    return {
-      packageName: "All Recipe Diet Starter Package",
-      packageKey: "starter",
-      deliveryUrl: process.env.STARTER_DELIVERY_URL || STARTER_DEFAULT_DELIVERY_URL,
-    };
-  }
-
+  // Amount-based fallback for the rare case where a session arrives without a
+  // recognized payment_link. NOTE: Starter and Gluten-Free are BOTH $19
+  // (amount_total === 1900), so amount alone cannot tell them apart — the
+  // payment_link matches above are the only reliable signal. Only Premium
+  // ($29) is unambiguous by price.
   if (session.amount_total === 2900) {
     return {
       packageName: "All Recipe Diet Premium Package",
@@ -92,87 +87,11 @@ function getPackageFromSession(session) {
     };
   }
 
-  if (session.amount_total === 1900) {
-    return {
-      packageName: "All Recipe Diet Gluten-Free Package",
-      packageKey: "gluten-free",
-      deliveryUrl: process.env.GLUTEN_FREE_DELIVERY_URL || GLUTEN_FREE_DEFAULT_DELIVERY_URL,
-    };
-  }
-
   return {
     packageName: "Unknown All Recipe Diet Package",
     packageKey: "unknown",
     deliveryUrl: "",
   };
-}
-
-async function processBankPayout(session, packageInfo) {
-  const stripeConnectAccountId = process.env.STRIPE_CONNECTED_ACCOUNT_ID;
-
-  // If no connected account, skip payout but log it
-  if (!stripeConnectAccountId) {
-    console.log("STRIPE_CONNECTED_ACCOUNT_ID not configured. Payout not processed.", {
-      sessionId: session.id,
-      amount: session.amount_total,
-      currency: session.currency,
-    });
-    return { configured: false, processed: false, reason: "account_not_configured" };
-  }
-
-  try {
-    // Verify payment was actually captured
-    if (session.payment_status !== "paid") {
-      console.warn("Payment not yet captured. Skipping payout.", { sessionId: session.id, status: session.payment_status });
-      return { configured: true, processed: false, reason: "payment_not_captured" };
-    }
-
-    // Calculate payout amount (after fees)
-    const payoutAmount = Math.round(session.amount_total * PAYOUT_PERCENTAGE);
-    
-    // Create payout to connected account
-    const payout = await stripe.payouts.create(
-      {
-        amount: payoutAmount,
-        currency: session.currency.toLowerCase(),
-        description: `Payment for ${packageInfo.packageName} (Order: ${session.id})`,
-        metadata: {
-          checkout_session_id: session.id,
-          package_key: packageInfo.packageKey,
-          original_amount: session.amount_total,
-          fee_amount: session.amount_total - payoutAmount,
-        },
-      },
-      { stripeAccount: stripeConnectAccountId }
-    );
-
-    console.log("Bank payout processed successfully", {
-      payoutId: payout.id,
-      amount: payoutAmount,
-      status: payout.status,
-      sessionId: session.id,
-    });
-
-    return {
-      configured: true,
-      processed: true,
-      payoutId: payout.id,
-      status: payout.status,
-      amount: payoutAmount,
-    };
-  } catch (error) {
-    console.error("Bank payout error", {
-      error: error.message,
-      sessionId: session.id,
-      amount: session.amount_total,
-    });
-
-    return {
-      configured: true,
-      processed: false,
-      error: error.message,
-    };
-  }
 }
 
 async function notifyDeliveryAutomation(payload) {
@@ -195,6 +114,26 @@ async function notifyDeliveryAutomation(payload) {
   }
 
   return { configured: true, status: response.status };
+}
+
+async function recordPurchase(payload) {
+  // Persist the purchase to the Netlify Database `purchases` table so there is a
+  // durable record of every completed checkout. Non-fatal: a database problem
+  // must never block delivery of the recipes the customer just paid for.
+  try {
+    const db = getDatabase();
+    await db.sql`
+      INSERT INTO purchases (email, stripe_session_id, package_name)
+      VALUES (${payload.customerEmail || ""}, ${payload.checkoutSessionId || ""}, ${payload.packageName})
+    `;
+    return { recorded: true };
+  } catch (error) {
+    console.error("Failed to record purchase in database", {
+      error: error.message,
+      sessionId: payload.checkoutSessionId,
+    });
+    return { recorded: false, error: error.message };
+  }
 }
 
 function buildRecipeEmailHtml(payload) {
@@ -368,23 +307,18 @@ exports.handler = async (event) => {
   };
 
   try {
-    // Process all actions in parallel: delivery, email, and bank payout
-    const [deliveryResult, emailResult] = await Promise.all([
-  notifyDeliveryAutomation(deliveryPayload),
-  sendRecipeEmail(deliveryPayload),
-]);
-
-const payoutResult = {
-  configured: false,
-  processed: false,
-  reason: "automatic_stripe_payouts"
-};
+    // Process all actions in parallel: delivery, email, and purchase record.
+    const [deliveryResult, emailResult, purchaseResult] = await Promise.all([
+      notifyDeliveryAutomation(deliveryPayload),
+      sendRecipeEmail(deliveryPayload),
+      recordPurchase(deliveryPayload),
+    ]);
 
     console.log("Stripe checkout completed", {
       ...deliveryPayload,
       deliveryResult,
       emailResult,
-      payoutResult,
+      purchaseResult,
     });
 
     return {
@@ -395,9 +329,7 @@ const payoutResult = {
         deliveryAutomationConfigured: deliveryResult.configured,
         recipeEmailConfigured: emailResult.configured,
         recipeEmailSent: Boolean(emailResult.sent),
-        bankPayoutConfigured: payoutResult.configured,
-        bankPayoutProcessed: payoutResult.processed,
-        payoutId: payoutResult.payoutId || null,
+        purchaseRecorded: Boolean(purchaseResult.recorded),
       }),
     };
   } catch (error) {

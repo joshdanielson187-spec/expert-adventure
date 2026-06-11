@@ -15,7 +15,7 @@ Netlify rewrites that path to the underlying function at `/.netlify/functions/st
 When Stripe sends a `checkout.session.completed` event:
 
 - The Stripe signature is verified using `STRIPE_WEBHOOK_SECRET`.
-- The function maps the purchase to one of three packages by Stripe payment link ID (with an amount-based fallback for Starter/Premium):
+- The function maps the purchase to one of three packages by Stripe payment link ID (with an amount-based fallback for Premium only, since Starter and Gluten-Free are both $19 and cannot be told apart by price):
   - **Starter** — payment link `plink_1TTmthHHJHOb4J4jVWRDRXQY` ($19) → `/downloads/starter-package-9f4d2a7c.html`
   - **Premium** — payment link `plink_1TTmthHHJHOb4J4jRLkHKP3J` ($29) → `/downloads/premium-package-c8e7b3a1.html`
   - **Gluten-Free** — payment link `plink_1TXq65HHJHOb4J4j0SrDA1sK` ($19) → `/downloads/gluten-free-package-a6c91d2f.html`

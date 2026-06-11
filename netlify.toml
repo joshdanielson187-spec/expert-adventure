@@ -6,6 +6,12 @@
   publish = "public"
   functions = "netlify/functions"
 
+[functions]
+  # esbuild correctly resolves modern packages that use "exports" subpath maps
+  # (e.g. @netlify/database -> waddler/neon-http). The legacy tracer fails to
+  # bundle these and throws EISDIR during Functions bundling.
+  node_bundler = "esbuild"
+
 [[redirects]]
   from = "/api/stripe-webhook"
   to = "/.netlify/functions/stripe-webhook"
