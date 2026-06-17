@@ -252,7 +252,7 @@ function buildRecipeEmailText(payload) {
 
 async function sendRecipeEmail(payload) {
   const resendApiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.FROM_EMAIL || "All Recipe Diet <onboarding@resend.dev>";
+  const fromEmail = process.env.FROM_EMAIL || "All Recipe Diet <noreply@all-recipe-diet.org>";
   const replyToEmail = process.env.REPLY_TO_EMAIL || "";
 
   if (!resendApiKey) {
@@ -313,34 +313,35 @@ exports.handler = async (event) => {
     };
   }
 
-  const rawBody = event.isBase64Encoded
-    ? Buffer.from(event.body || "", "base64").toString("utf8")
-    : event.body || "";
+const rawBody = event.isBase64Encoded
+  ? Buffer.from(event.body || "", "base64").toString("utf8")
+  : event.body || "";
 
-  const signatureHeader = event.headers["stripe-signature"] || event.headers["Stripe-Signature"];
-  const isValidSignature = verifyStripeSignature(rawBody, signatureHeader, webhookSecret);
+const signatureHeader =
+  event.headers["stripe-signature"] ||
+  event.headers["Stripe-Signature"];
 
-  if (!isValidSignature) {
-    console.warn("Invalid Stripe webhook signature.");
-    return {
-      statusCode: 401,
-      body: JSON.stringify({ error: "Invalid signature" }),
-    };
-  }
+let stripeEvent;
 
-  let stripeEvent;
+try {
+  stripeEvent = stripe.webhooks.constructEvent(
+    rawBody,
+    signatureHeader,
+    webhookSecret.trim()
+  );
+} catch (error) {
+  console.error("Stripe webhook signature error:", error.message);
 
-  try {
-    stripeEvent = JSON.parse(rawBody);
-  } catch (error) {
-    console.error("Webhook JSON parse error", error);
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Invalid JSON" }),
-    };
-  }
+  return {
+    statusCode: 401,
+    body: JSON.stringify({
+      error: "Invalid Stripe signature",
+      details: error.message,
+    }),
+  };
+}
 
-  if (stripeEvent.type !== "checkout.session.completed") {
+if (stripeEvent.type !== "checkout.session.completed") {
     return {
       statusCode: 200,
       body: JSON.stringify({ received: true, ignored: stripeEvent.type }),
@@ -369,11 +370,16 @@ exports.handler = async (event) => {
 
   try {
     // Process all actions in parallel: delivery, email, and bank payout
-    const [deliveryResult, emailResult, payoutResult] = await Promise.all([
-      notifyDeliveryAutomation(deliveryPayload),
-      sendRecipeEmail(deliveryPayload),
-      processBankPayout(session, packageInfo),
-    ]);
+    const [deliveryResult, emailResult] = await Promise.all([
+  notifyDeliveryAutomation(deliveryPayload),
+  sendRecipeEmail(deliveryPayload),
+]);
+
+const payoutResult = {
+  configured: false,
+  processed: false,
+  reason: "automatic_stripe_payouts"
+};
 
     console.log("Stripe checkout completed", {
       ...deliveryPayload,
